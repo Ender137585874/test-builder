@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>示例自测系统</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #c0392b, #8e44ad);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .main-content {
+            display: flex;
+            min-height: 600px;
+        }
+        
+        .question-area {
+            flex: 3;
+            padding: 25px;
+            border-right: 1px solid #eee;
+        }
+        
+        .sidebar {
+            flex: 1;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        
+        .chapter-header {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #8e44ad;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #eee;
+        }
+        
+        .question-text {
+            font-size: 18px;
+            margin-bottom: 25px;
+            font-weight: 500;
+            line-height: 1.5;
+        }
+        
+        .options {
+            margin-bottom: 30px;
+        }
+        
+        .option {
+            padding: 12px 15px;
+            margin: 10px 0;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+        
+        .option:hover {
+            background-color: #e9ecef;
+            transform: translateX(5px);
+        }
+        
+        .option.selected {
+            background-color: #d1ecf1;
+            border-color: #bee5eb;
+        }
+        
+        .option.correct {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+        }
+        
+        .option.incorrect {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }
+        
+        .option input {
+            margin-right: 12px;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-secondary {
+            background-color: #95a5a6;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #7f8c8d;
+        }
+        
+        .btn-submit {
+            background-color: #2ecc71;
+            color: white;
+            padding: 12px 30px;
+            font-size: 18px;
+            margin-top: 10px;
+            display: none;
+        }
+        
+        .btn-submit:hover {
+            background-color: #27ae60;
+        }
+        
+        .feedback {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .feedback.correct {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .feedback.incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .chapter-nav {
+            margin-bottom: 30px;
+        }
+        
+        .chapter-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .chapter-questions {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+        
+        .question-nav {
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #ecf0f1;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .question-nav:hover {
+            background-color: #bdc3c7;
+            transform: scale(1.1);
+        }
+        
+        .question-nav.answered {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .question-nav.correct {
+            background-color: #2ecc71;
+            color: white;
+        }
+        
+        .question-nav.incorrect {
+            background-color: #e74c3c;
+            color: white;
+        }
+        
+        .stats {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+        
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 8px 0;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background-color: #ecf0f1;
+            border-radius: 5px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background-color: #2ecc71;
+            transition: width 0.5s ease;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .question-area {
+                border-right: none;
+                border-bottom: 1px solid #eee;
+            }
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+            position: relative;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            right: 15px;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>示例自测系统</h1>
+            <div class="subtitle">自测系统@千纸鹤</div>
+            <button id="announcement-btn" class="btn">公告</button>
+        </header>
+        
+        <div class="main-content">
+            <div class="question-area">
+                <div class="chapter-header">第 <span id="current-chapter">1</span> 章</div>
+                <div class="question-text">
+                    <span id="question-type"></span>
+                    <span id="current-question"></span>
+                </div>
+                
+                <div class="options" id="options-container">
+                    <!-- 选项将在这里动态生成 -->
+                </div>
+                
+                <button id="submit-btn" class="btn btn-submit">提交答案</button>
+                
+                <div id="feedback" class="feedback"></div>
+                
+                <div class="navigation">
+                    <button id="prev-btn" class="btn btn-secondary">上一题</button>
+                    <div>题目 <span id="current-index">1</span> / <span id="total-questions">100</span></div>
+                    <button id="next-btn" class="btn btn-primary">下一题</button>
+                </div>
+            </div>
+            
+            <div class="sidebar">
+                <div class="chapter-nav">
+                    <div class="chapter-title">章节导航</div>
+                    <select id="chapter-select" class="btn">
+                        <option value="1">第1章</option>
+                        <option value="2">第2章</option>
+                        <option value="3">第3章</option>
+                        <option value="5">第5章</option>
+                        <option value="6">第6章</option>
+                        <option value="7">第7章</option>
+                        <option value="9">第9章</option>
+                    </select>
+                </div>
+                
+                <div class="chapter-nav">
+                    <div class="chapter-title">题目导航</div>
+                    <div class="chapter-questions" id="questions-navigation">
+                        <!-- 题目导航将在这里动态生成 -->
+                    </div>
+                </div>
+                
+                <div class="stats">
+                    <div class="stat-item">
+                        <span>已完成：</span>
+                        <span id="completed-count">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span>正确率：</span>
+                        <span id="accuracy-rate">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" id="progress-bar" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="announcement-modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>系统公告</h2>
+        <div id="announcement-content">
+            <p>欢迎使用本刷题系统，祝学习顺利！</p>
+        </div>
+    </div>
+</div>
+
+    <script>
+        // ================ 题库数据（由 自测生成系统 自动生成，请勿手动修改） ================
+        const questions = [
+    {
+        "id": 1,
+        "chapter": 2,
+        "type": "single",
+        "question": "新民主主义革命的领导力量是()",
+        "options": [
+            "A.农民阶级",
+            "B.无产阶级",
+            "C.资产阶级",
+            "D.小资产阶级"
+        ],
+        "answer": "B"
+    },
+    {
+        "id": 2,
+        "chapter": 3,
+        "type": "multi",
+        "question": "社会主义改造的三大改造对象包括()",
+        "options": [
+            "A.个体农业",
+            "B.个体手工业",
+            "C.资本主义工商业",
+            "D.官僚资本主义"
+        ],
+        "answer": [
+            "A",
+            "B",
+            "C"
+        ]
+    },
+    {
+        "id": 3,
+        "chapter": 5,
+        "type": "judge",
+        "question": "我国仍处于社会主义初级阶段。",
+        "options": [
+            "A.正确",
+            "B.错误"
+        ],
+        "answer": "A"
+    },
+    {
+        "id": 4,
+        "chapter": 2,
+        "type": "single",
+        "question": "新民主主义革命的总路线中，革命的领导力量是()",
+        "options": [
+            "A.农民阶级",
+            "B.无产阶级",
+            "C.资产阶级",
+            "D.小资产阶级"
+        ],
+        "answer": "B"
+    },
+    {
+        "id": 5,
+        "chapter": 3,
+        "type": "single",
+        "question": "我国社会主义改造基本完成后，国内的主要矛盾是()",
+        "options": [
+            "A.无产阶级和资产阶级之间的矛盾",
+            "B.人民对于经济文化迅速发展的需要同当前经济文化不能满足人民需要的状况之间的矛盾",
+            "C.人民日益增长的美好生活需要和不平衡不充分的发展之间的矛盾",
+            "D.社会主义道路和资本主义道路之间的矛盾"
+        ],
+        "answer": "B"
+    },
+    {
+        "id": 6,
+        "chapter": 5,
+        "type": "multi",
+        "question": "社会主义的本质包括()",
+        "options": [
+            "A.解放生产力，发展生产力",
+            "B.消灭剥削，消除两极分化",
+            "C.最终达到共同富裕",
+            "D.实行按劳分配"
+        ],
+        "answer": [
+            "A",
+            "B",
+            "C"
+        ]
+    },
+    {
+        "id": 7,
+        "chapter": 5,
+        "type": "judge",
+        "question": "我国仍处于并将长期处于社会主义初级阶段。",
+        "options": [
+            "A.正确",
+            "B.错误"
+        ],
+        "answer": "A"
+    },
+    {
+        "id": 8,
+        "chapter": 1,
+        "type": "single",
+        "question": "毛泽东提出“农村包围城市、武装夺取政权”道路的代表著作是()",
+        "options": [
+            "A.《星星之火，可以燎原》",
+            "B.《论持久战》",
+            "C.《新民主主义论》",
+            "D.《论联合政府》"
+        ],
+        "answer": "A"
+    },
+    {
+        "id": 9,
+        "chapter": 3,
+        "type": "single",
+        "question": "社会主义改造基本完成后，我国国内的主要矛盾是()",
+        "options": [
+            "A.无产阶级和资产阶级的矛盾",
+            "B.人民对于建立先进的工业国的要求同落后的农业国的现实之间的矛盾",
+            "C.人民日益增长的美好生活需要和不平衡不充分的发展之间的矛盾",
+            "D.社会主义道路和资本主义道路的矛盾"
+        ],
+        "answer": "B"
+    },
+    {
+        "id": 10,
+        "chapter": 5,
+        "type": "multi",
+        "question": "社会主义本质是()",
+        "options": [
+            "A.解放生产力，发展生产力",
+            "B.消灭剥削，消除两极分化",
+            "C.最终达到共同富裕",
+            "D.以上都是"
+        ],
+        "answer": [
+            "A",
+            "B",
+            "C",
+            "D"
+        ]
+    },
+    {
+        "id": 11,
+        "chapter": 5,
+        "type": "judge",
+        "question": "我国社会主义初级阶段的基本国情没有变。",
+        "options": [
+            "A.正确",
+            "B.错误"
+        ],
+        "answer": "A"
+    },
+    {
+        "id": 12,
+        "chapter": 9,
+        "type": "judge",
+        "question": "改革开放是决定当代中国命运的关键一招。",
+        "options": [
+            "A.正确",
+            "B.错误"
+        ],
+        "answer": "B"
+    },
+    {
+        "id": 13,
+        "chapter": 5,
+        "type": "single",
+        "question": "邓小平理论形成的时代背景是()",
+        "options": [
+            "A.和平与发展成为时代主题",
+            "B.世界多极化和经济全球化",
+            "C.第三次科技革命",
+            "D.社会主义运动的曲折发展"
+        ],
+        "answer": "A"
+    },
+    {
+        "id": 14,
+        "chapter": 5,
+        "type": "single",
+        "question": "邓小平理论的首要的基本理论问题是()",
+        "options": [
+            "A.什么是社会主义、怎样建设社会主义",
+            "B.什么是市场经济",
+            "C.什么是现代化",
+            "D.什么是改革开放"
+        ],
+        "answer": "A"
+    },
+    {
+        "id": 15,
+        "chapter": 5,
+        "type": "single",
+        "question": "我国社会主义初级阶段的基本经济制度是()",
+        "options": [
+            "A.公有制为主体、多种所有制经济共同发展",
+            "B.按劳分配为主体",
+            "C.计划经济",
+            "D.市场经济"
+        ],
+        "answer": "A"
+    },
+    {
+        "id": 16,
+        "chapter": 5,
+        "type": "multi",
+        "question": "需要正确处理全面深化改革中的重大关系有（）",
+        "options": [
+            "A.整体推进和重点突破的关系",
+            "B.顶层设计和摸着石头过河的关系",
+            "C.改革、发展、稳定的关系",
+            "D.解放思想和实事求是的关系"
+        ],
+        "answer": [
+            "A",
+            "B",
+            "C",
+            "D"
+        ]
+    },
+    {
+        "id": 17,
+        "chapter": 6,
+        "type": "multi",
+        "question": "\"三个代表\"重要思想的内容是（）",
+        "options": [
+            "A.代表中国先进生产力的发展要求",
+            "B.代表中国先进文化的前进方向",
+            "C.代表中国最广大人民的根本利益",
+            "D.代表中国工人阶级的利益"
+        ],
+        "answer": [
+            "A",
+            "B",
+            "C"
+        ]
+    },
+    {
+        "id": 18,
+        "chapter": 7,
+        "type": "single",
+        "question": "科学发展观的核心立场是()",
+        "options": [
+            "A.以人为本",
+            "B.全面协调可持续",
+            "C.统筹兼顾",
+            "D.发展"
+        ],
+        "answer": "A"
+    },
+    {
+        "id": 19,
+        "chapter": 1,
+        "type": "judge",
+        "question": "实事求是是党的思想路线的核心。",
+        "options": [
+            "A.正确",
+            "B.错误"
+        ],
+        "answer": "A"
+    },
+    {
+        "id": 20,
+        "chapter": 5,
+        "type": "judge",
+        "question": "我国已经建成了社会主义现代化强国。",
+        "options": [
+            "A.正确",
+            "B.错误"
+        ],
+        "answer": "B"
+    },
+    {
+        "id": 21,
+        "chapter": 1,
+        "type": "single",
+        "question": "毛泽东思想形成和发展的时代背景是()",
+        "options": [
+            "A.中国沦为半殖民地半封建社会",
+            "B.帝国主义战争和无产阶级革命",
+            "C.第一次世界大战的爆发",
+            "D.中国工人阶级的成长壮大"
+        ],
+        "answer": "B"
+    },
+    {
+        "id": 22,
+        "chapter": 1,
+        "type": "single",
+        "question": "开辟了世界无产阶级社会主义革命新时代的伟大事件是()",
+        "options": [
+            "A.俄国十月革命",
+            "B.五四运动",
+            "C.中国共产党建立",
+            "D.中华人民共和国建立"
+        ],
+        "answer": "A"
+    },
+    {
+        "id": 23,
+        "chapter": 1,
+        "type": "multi",
+        "question": "毛泽东思想活的灵魂包括（）",
+        "options": [
+            "A.实事求是",
+            "B.群众路线",
+            "C.独立自主",
+            "D.统一战线"
+        ],
+        "answer": [
+            "A",
+            "B",
+            "C"
+        ]
+    },
+    {
+        "id": 24,
+        "chapter": 1,
+        "type": "judge",
+        "question": "毛泽东思想是马克思列宁主义在中国的运用和发展，是被实践证明了的关于中国革命和建设的正确的理论原则和经验总结，是中国共产党集体智慧的结晶。这一论断是否正确？",
+        "options": [
+            "A.正确",
+            "B.错误"
+        ],
+        "answer": "A"
+    },
+    {
+        "id": 25,
+        "chapter": 1,
+        "type": "multi",
+        "question": "以下属于毛泽东思想主要内容的有（）",
+        "options": [
+            "A.新民主主义革命理论",
+            "B.社会主义革命和社会主义建设理论",
+            "C.革命军队建设和军事战略理论",
+            "D.政策和策略的理论"
+        ],
+        "answer": [
+            "A",
+            "B",
+            "C",
+            "D"
+        ]
+    },
+    {
+        "id": 26,
+        "chapter": 2,
+        "type": "single",
+        "question": "近代中国社会最主要的矛盾是()",
+        "options": [
+            "A.帝国主义和中华民族的矛盾",
+            "B.封建主义和人民大众的矛盾",
+            "C.资产阶级和无产阶级的矛盾",
+            "D.地主阶级和农民阶级的矛盾"
+        ],
+        "answer": "A"
+    },
+    {
+        "id": 27,
+        "chapter": 2,
+        "type": "multi",
+        "question": "新民主主义革命的三大法宝是（）",
+        "options": [
+            "A.统一战线",
+            "B.武装斗争",
+            "C.党的建设",
+            "D.土地革命"
+        ],
+        "answer": [
+            "A",
+            "B",
+            "C"
+        ]
+    },
+    {
+        "id": 28,
+        "chapter": 2,
+        "type": "judge",
+        "question": "新民主主义革命的性质是资产阶级民主主义革命。",
+        "options": [
+            "A.正确",
+            "B.错误"
+        ],
+        "answer": "A"
+    },
+    {
+        "id": 29,
+        "chapter": 2,
+        "type": "single",
+        "question": "新民主主义革命的领导阶级是()",
+        "options": [
+            "A.农民阶级",
+            "B.无产阶级",
+            "C.资产阶级",
+            "D.小资产阶级"
+        ],
+        "answer": "B"
+    },
+    {
+        "id": 30,
+        "chapter": 2,
+        "type": "judge",
+        "question": "中国共产党在中国革命中战胜敌人的三个主要法宝是统一战线、武装斗争、党的建设。",
+        "options": [
+            "A.对",
+            "B.错"
+        ],
+        "answer": "A"
+    }
+];
+        // ==============================================================================
+        
+        // 初始化变量
+        let currentQuestionIndex = 0;
+        let userAnswers = {};
+        let results = {};
+        
+        // DOM元素
+        const currentChapterEl = document.getElementById('current-chapter');
+        const currentQuestionEl = document.getElementById('current-question');
+        const questionTypeEl = document.getElementById('question-type');
+        const optionsContainerEl = document.getElementById('options-container');
+        const submitBtnEl = document.getElementById('submit-btn');
+        const feedbackEl = document.getElementById('feedback');
+        const prevBtnEl = document.getElementById('prev-btn');
+        const nextBtnEl = document.getElementById('next-btn');
+        const currentIndexEl = document.getElementById('current-index');
+        const totalQuestionsEl = document.getElementById('total-questions');
+        const chapterSelectEl = document.getElementById('chapter-select');
+        const questionsNavEl = document.getElementById('questions-navigation');
+        const completedCountEl = document.getElementById('completed-count');
+        const accuracyRateEl = document.getElementById('accuracy-rate');
+        const progressBarEl = document.getElementById('progress-bar');
+        const modal = document.getElementById('announcement-modal');
+        const closeBtn = document.querySelector('.close');
+        const announcementBtn = document.getElementById('announcement-btn');
+        
+        // 显示弹窗
+        function showAnnouncement() {
+            modal.style.display = 'block';
+        }
+
+        // 关闭弹窗
+        function closeAnnouncement() {
+            modal.style.display = 'none';
+        }
+
+        // 点击关闭按钮关闭弹窗
+        closeBtn.addEventListener('click', closeAnnouncement);
+
+        // 点击弹窗外部关闭
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                closeAnnouncement();
+            }
+        });
+
+        // 页面加载完成后显示公告
+        window.addEventListener('load', () => {
+            showAnnouncement();
+        });
+
+        // 点击公告按钮显示弹窗
+        announcementBtn.addEventListener('click', showAnnouncement);
+        // 初始化应用
+        function initApp() {
+            totalQuestionsEl.textContent = questions.length;
+            loadQuestion(currentQuestionIndex);
+            generateQuestionsNavigation();
+            updateStats();
+            
+            // 加载保存的进度
+            const savedProgress = localStorage.getItem('quizProgress');
+            if (savedProgress) {
+                const progress = JSON.parse(savedProgress);
+                userAnswers = progress.userAnswers;
+                results = progress.results;
+                updateQuestionsNavigation();
+                updateStats();
+            }
+        }
+        
+        // 加载题目
+        function loadQuestion(index) {
+            const question = questions[index];
+            
+            // 更新题目信息
+            currentQuestionIndex = index;
+            currentChapterEl.textContent = question.chapter;
+            currentQuestionEl.textContent = question.question;
+            currentIndexEl.textContent = index + 1;
+            
+            // 设置题目类型
+            let typeText = '';
+            if (question.type === 'single') typeText = '[单选题] ';
+            else if (question.type === 'multi') typeText = '[多选题] ';
+            else if (question.type === 'judge') typeText = '[判断题] ';
+            questionTypeEl.textContent = typeText;
+            
+            // 清空选项容器
+            optionsContainerEl.innerHTML = '';
+            
+            // 生成选项
+            question.options.forEach((option, idx) => {
+                const optionEl = document.createElement('div');
+                optionEl.className = 'option';
+                
+                const input = document.createElement('input');
+                input.type = question.type === 'multi' ? 'checkbox' : 'radio';
+                input.name = 'option';
+                input.value = idx;
+                
+                const label = document.createElement('label');
+                label.htmlFor = `option-${idx}`;
+                label.textContent = option;
+                
+                optionEl.appendChild(input);
+                optionEl.appendChild(label);
+                
+                // 添加选择事件
+                optionEl.addEventListener('click', () => {
+                    selectOption(optionEl, idx);
+                });
+                
+                // 恢复已选答案
+                if (userAnswers[index]) {
+                    if (question.type === 'multi') {
+                        if (userAnswers[index].includes(idx)) {
+                            optionEl.classList.add('selected');
+                            input.checked = true;
+                        }
+                    } else {
+                        if (userAnswers[index] === idx) {
+                            optionEl.classList.add('selected');
+                            input.checked = true;
+                        }
+                    }
+                }
+                
+                optionsContainerEl.appendChild(optionEl);
+            });
+            
+            // 显示/隐藏提交按钮
+            submitBtnEl.style.display = question.type === 'multi' ? 'block' : 'none';
+            
+            // 更新反馈
+            if (results[index]) {
+                showFeedback(results[index].isCorrect, question.answer);
+            } else {
+                feedbackEl.style.display = 'none';
+            }
+            
+            // 更新导航按钮状态
+            prevBtnEl.disabled = index === 0;
+            nextBtnEl.disabled = index === questions.length - 1;
+            
+            // 设置章节选择
+            chapterSelectEl.value = question.chapter;
+        }
+        
+        // 选择选项
+        function selectOption(optionEl, optionIndex) {
+            const question = questions[currentQuestionIndex];
+            const isMulti = question.type === 'multi';
+            const options = optionsContainerEl.querySelectorAll('.option');
+            
+            if (isMulti) {
+                // 多选题：切换选中状态
+                optionEl.classList.toggle('selected');
+                const checkbox = optionEl.querySelector('input');
+                checkbox.checked = !checkbox.checked;
+                
+                // 更新用户答案
+                if (!userAnswers[currentQuestionIndex]) {
+                    userAnswers[currentQuestionIndex] = [];
+                }
+                
+                const index = userAnswers[currentQuestionIndex].indexOf(optionIndex);
+                if (index === -1) {
+                    userAnswers[currentQuestionIndex].push(optionIndex);
+                } else {
+                    userAnswers[currentQuestionIndex].splice(index, 1);
+                }
+            } else {
+                // 单选/判断题：直接选择
+                options.forEach(opt => {
+                    opt.classList.remove('selected');
+                    opt.querySelector('input').checked = false;
+                });
+                
+                optionEl.classList.add('selected');
+                optionEl.querySelector('input').checked = true;
+                
+                // 更新用户答案
+                userAnswers[currentQuestionIndex] = optionIndex;
+                
+                // 立即检查答案（非多选题）
+                if (question.type !== 'multi') {
+                    checkAnswer();
+                }
+            }
+            
+            // 更新导航状态
+            updateQuestionsNavigation();
+            updateStats();
+            
+            // 保存进度
+            saveProgress();
+        }
+        
+        // 提交答案（多选）
+        submitBtnEl.addEventListener('click', checkAnswer);
+        
+        // 检查答案
+        function checkAnswer() {
+            const question = questions[currentQuestionIndex];
+            const userAnswer = userAnswers[currentQuestionIndex];
+            let isCorrect = false;
+            
+            if (question.type === 'multi') {
+                // 多选题：检查答案（顺序无关）
+                if (userAnswer && userAnswer.length === question.answer.length) {
+                    const userAnswersSorted = userAnswer.sort().map(idx => question.options[idx][0]);
+                    const correctAnswersSorted = [...question.answer].sort();
+                    isCorrect = JSON.stringify(userAnswersSorted) === JSON.stringify(correctAnswersSorted);
+                }
+            } else {
+                // 单选/判断题：检查答案
+                const selectedOption = question.options[userAnswer];
+                isCorrect = selectedOption.startsWith(question.answer);
+            }
+            
+            // 保存结果
+            results[currentQuestionIndex] = {
+                isCorrect,
+                userAnswer,
+                correctAnswer: question.answer
+            };
+            
+            // 显示反馈
+            showFeedback(isCorrect, question.answer);
+            
+            // 更新导航状态
+            updateQuestionsNavigation();
+            updateStats();
+            
+            // 保存进度
+            saveProgress();
+        }
+        
+        // 显示反馈
+        function showFeedback(isCorrect, correctAnswer) {
+            feedbackEl.textContent = isCorrect 
+                ? '✓ 回答正确！' 
+                : `✗ 回答错误！正确答案是：${correctAnswer}`;
+            
+            feedbackEl.className = `feedback ${isCorrect ? 'correct' : 'incorrect'}`;
+            feedbackEl.style.display = 'block';
+            
+            // 多选题显示所有选项状态
+                        // 多选题显示所有选项状态
+            if (questions[currentQuestionIndex].type === 'multi') {
+                const options = optionsContainerEl.querySelectorAll('.option');
+                options.forEach((option, idx) => {
+                    const optionLetter = questions[currentQuestionIndex].options[idx][0];
+                    const isSelected = userAnswers[currentQuestionIndex]?.includes(idx);
+                    
+                    if (isSelected) {
+                        const isCorrectAnswer = questions[currentQuestionIndex].answer.includes(optionLetter);
+                        option.classList.toggle('correct', isCorrectAnswer);
+                        option.classList.toggle('incorrect', !isCorrectAnswer);
+                    } else {
+                        const isCorrectAnswer = questions[currentQuestionIndex].answer.includes(optionLetter);
+                        option.classList.toggle('correct', isCorrectAnswer);
+                    }
+                });
+            } else {
+                // 单选/判断题显示正确选项
+                const options = optionsContainerEl.querySelectorAll('.option');
+                options.forEach((option, idx) => {
+                    const optionLetter = questions[currentQuestionIndex].options[idx][0];
+                    const isCorrectAnswer = optionLetter === questions[currentQuestionIndex].answer;
+                    
+                    if (isCorrectAnswer) {
+                        option.classList.add('correct');
+                    } else {
+                        option.classList.add('incorrect');
+                    }
+                });
+            }
+        }
+        
+        // 生成题目导航
+        function generateQuestionsNavigation() {
+            questionsNavEl.innerHTML = '';
+            
+            questions.forEach((_, index) => {
+                const navItem = document.createElement('div');
+                navItem.className = 'question-nav';
+                navItem.textContent = index + 1;
+                navItem.dataset.index = index;
+                
+                navItem.addEventListener('click', () => {
+                    loadQuestion(index);
+                });
+                
+                questionsNavEl.appendChild(navItem);
+            });
+            
+            updateQuestionsNavigation();
+        }
+        
+        // 更新题目导航状态
+        function updateQuestionsNavigation() {
+            const navItems = questionsNavEl.querySelectorAll('.question-nav');
+            
+            navItems.forEach((item, index) => {
+                item.classList.remove('answered', 'correct', 'incorrect');
+                
+                if (results[index]) {
+                    item.classList.add('answered');
+                    item.classList.toggle('correct', results[index].isCorrect);
+                    item.classList.toggle('incorrect', !results[index].isCorrect);
+                }
+            });
+        }
+        
+        // 更新统计信息
+        function updateStats() {
+            const answeredCount = Object.keys(results).length;
+            const correctCount = Object.values(results).filter(r => r.isCorrect).length;
+            const accuracy = answeredCount > 0 ? Math.round((correctCount / answeredCount) * 100) : 0;
+            const progress = Math.round((answeredCount / questions.length) * 100);
+            
+            completedCountEl.textContent = `${answeredCount}/${questions.length}`;
+            accuracyRateEl.textContent = `${accuracy}%`;
+            progressBarEl.style.width = `${progress}%`;
+        }
+        
+        // 保存进度
+        function saveProgress() {
+            const progress = {
+                userAnswers,
+                results
+            };
+            localStorage.setItem('quizProgress', JSON.stringify(progress));
+        }
+        
+        // 清除进度
+        function resetProgress() {
+            userAnswers = {};
+            results = {};
+            localStorage.removeItem('quizProgress');
+            updateQuestionsNavigation();
+            updateStats();
+            loadQuestion(currentQuestionIndex);
+        }
+        
+        // 切换章节
+        chapterSelectEl.addEventListener('change', () => {
+            const chapter = parseInt(chapterSelectEl.value);
+            const chapterQuestions = questions.filter(q => q.chapter == chapter);
+            
+            if (chapterQuestions.length > 0) {
+                const firstQuestionIndex = questions.findIndex(q => q.chapter == chapter);
+                loadQuestion(firstQuestionIndex);
+            }
+        });
+        
+        // 上一题
+        prevBtnEl.addEventListener('click', () => {
+            if (currentQuestionIndex > 0) {
+                loadQuestion(currentQuestionIndex - 1);
+            }
+        });
+        
+        // 下一题
+        nextBtnEl.addEventListener('click', () => {
+            if (currentQuestionIndex < questions.length - 1) {
+                loadQuestion(currentQuestionIndex + 1);
+            }
+        });
+        
+        // 添加重置按钮
+        const resetBtn = document.createElement('button');
+        resetBtn.textContent = '重新开始';
+        resetBtn.className = 'btn';
+        resetBtn.style.background = '#e74c3c';
+        resetBtn.style.color = 'white';
+        resetBtn.style.marginTop = '20px';
+        resetBtn.addEventListener('click', resetProgress);
+        document.querySelector('.sidebar').appendChild(resetBtn);
+        // 在 resetBtn 后面添加 "获取最新版" 按钮
+        const updateBtn = document.createElement('button');
+        updateBtn.textContent = '获取最新版';
+        updateBtn.className = 'btn';
+        updateBtn.style.background = '#3498db';
+        updateBtn.style.color = 'white';
+        updateBtn.style.marginTop = '20px';
+        updateBtn.style.marginLeft = '10px';
+        updateBtn.addEventListener('click', () => {
+            // ================ 需要填写的网址 ================
+            const updateUrl = '#';  // 在此处填写目标网址
+            // ==============================================
+            window.location.href = updateUrl;
+        });
+        document.querySelector('.sidebar').appendChild(updateBtn);
+        
+        // 初始化应用
+        initApp();
+    </script>
+</body>
+</html>
+                   
