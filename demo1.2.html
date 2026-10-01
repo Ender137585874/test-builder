@@ -1,0 +1,3728 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>毛泽东思想与中国特色社会主义理论体系概论 - 在线测试</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #c0392b, #8e44ad);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .main-content {
+            display: flex;
+            min-height: 600px;
+        }
+        
+        .question-area {
+            flex: 3;
+            padding: 25px;
+            border-right: 1px solid #eee;
+        }
+        
+        .sidebar {
+            flex: 1;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        
+        .chapter-header {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #8e44ad;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #eee;
+        }
+        
+        .question-text {
+            font-size: 18px;
+            margin-bottom: 25px;
+            font-weight: 500;
+            line-height: 1.5;
+        }
+        
+        .options {
+            margin-bottom: 30px;
+        }
+        
+        .option {
+            padding: 12px 15px;
+            margin: 10px 0;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+        
+        .option:hover {
+            background-color: #e9ecef;
+            transform: translateX(5px);
+        }
+        
+        .option.selected {
+            background-color: #d1ecf1;
+            border-color: #bee5eb;
+        }
+        
+        .option.correct {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+        }
+        
+        .option.incorrect {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }
+        
+        .option input {
+            margin-right: 12px;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-secondary {
+            background-color: #95a5a6;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #7f8c8d;
+        }
+        
+        .btn-submit {
+            background-color: #2ecc71;
+            color: white;
+            padding: 12px 30px;
+            font-size: 18px;
+            margin-top: 10px;
+            display: none;
+        }
+        
+        .btn-submit:hover {
+            background-color: #27ae60;
+        }
+        
+        .feedback {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .feedback.correct {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .feedback.incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .chapter-nav {
+            margin-bottom: 30px;
+        }
+        
+        .chapter-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .chapter-questions {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+        
+        .question-nav {
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #ecf0f1;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .question-nav:hover {
+            background-color: #bdc3c7;
+            transform: scale(1.1);
+        }
+        
+        .question-nav.answered {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .question-nav.correct {
+            background-color: #2ecc71;
+            color: white;
+        }
+        
+        .question-nav.incorrect {
+            background-color: #e74c3c;
+            color: white;
+        }
+        
+        .stats {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+        
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 8px 0;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background-color: #ecf0f1;
+            border-radius: 5px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background-color: #2ecc71;
+            transition: width 0.5s ease;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .question-area {
+                border-right: none;
+                border-bottom: 1px solid #eee;
+            }
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+            position: relative;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            right: 15px;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>毛泽东思想与中国特色社会主义理论体系概论</h1>
+            <div class="subtitle">自测系统@千纸鹤</div>
+            <button id="announcement-btn" class="btn">公告</button>
+        </header>
+        
+        <div class="main-content">
+            <div class="question-area">
+                <div class="chapter-header">第 <span id="current-chapter">1</span> 章</div>
+                <div class="question-text">
+                    <span id="question-type"></span>
+                    <span id="current-question"></span>
+                </div>
+                
+                <div class="options" id="options-container">
+                    <!-- 选项将在这里动态生成 -->
+                </div>
+                
+                <button id="submit-btn" class="btn btn-submit">提交答案</button>
+                
+                <div id="feedback" class="feedback"></div>
+                
+                <div class="navigation">
+                    <button id="prev-btn" class="btn btn-secondary">上一题</button>
+                    <div>题目 <span id="current-index">1</span> / <span id="total-questions">100</span></div>
+                    <button id="next-btn" class="btn btn-primary">下一题</button>
+                </div>
+            </div>
+            
+            <div class="sidebar">
+                <div class="chapter-nav">
+                    <div class="chapter-title">章节导航</div>
+                    <select id="chapter-select" class="btn">
+                        <option value="1">第一章 毛泽东思想及其历史地位</option>
+                        <option value="2">第二章 新民主主义革命理论</option>
+                        <option value="3">第三章 社会主义改造理论</option>
+                        <option value="4">第四章 社会主义建设道路初步探索</option>
+                        <option value="5">第五章 邓小平理论</option>
+                        <option value="6">第六章 "三个代表"重要思想</option>
+                        <option value="7">第七章 科学发展观</option>
+                        <option value="8">24年期末选择题（AI答案）</option>
+                        <option value="9">23年期末选择题（AI答案）</option>
+                    </select>
+                </div>
+                
+                <div class="chapter-nav">
+                    <div class="chapter-title">题目导航</div>
+                    <div class="chapter-questions" id="questions-navigation">
+                        <!-- 题目导航将在这里动态生成 -->
+                    </div>
+                </div>
+                
+                <div class="stats">
+                    <div class="stat-item">
+                        <span>已完成：</span>
+                        <span id="completed-count">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span>正确率：</span>
+                        <span id="accuracy-rate">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" id="progress-bar" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="announcement-modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>系统公告</h2>
+        <div id="announcement-content">
+            <!-- ================ 在此处填写公告内容 ================ -->
+            <p>这是v1.2版本，更新于2025年6月24日12:55</p>
+            <p>部分题目可能有问题，如果发现联系微信13750700579</p>
+            <p>最新版会发布在界面最下方的“获取最新版”，使用百度网盘下载</p>
+            <p>更新内容：</p>
+            <p>1. 对题目中“极：”等异常字样清除</p>
+            <p>2. 修改了第二章第五题的选项异常</p>
+            <p>3. 修复已知问题</p>
+            <!-- ============================================= -->
+        </div>
+    </div>
+</div>
+
+    <script>
+        // ================ 需要填写的部分开始 ================
+        // 此处应填入文档1中的完整题目数据
+        const questions = [
+            // 第一章
+            {
+                "id": 1,
+                "chapter": 1,
+                "type": "single",
+                "question": "毛泽东思想形成和发展的时代背景是()",
+                "options": [
+                    "A.中国沦为半殖民地半封建社会",
+                    "B.帝国主义战争和无产阶级革命",
+                    "C.第一次世界大战的爆发",
+                    "D.中国工人阶级的成长壮大"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 2,
+                "chapter": 1,
+                "type": "single",
+                "question": "开辟了世界无产阶级社会主义革命新时代的伟大事件是()",
+                "options": [
+                    "A.俄国十月革命",
+                    "B.五四运动",
+                    "C.中国共产党建立",
+                    "D.中华人民共和国建立"
+                ],
+                "answer": "A"
+            },
+            {
+                "id": 3,
+                "chapter": 1,
+                "type": "single",
+                "question": "毛泽东思想形成和发展的实践基础是()",
+                "options": [
+                    "A.中国共产党领导人民进行革命和建设的成功实践",
+                    "B.中国共产党领导的工人运动",
+                    "C.中国共产党领导的农民运动",
+                    "D.中国共产党领导的学生运动"
+                ],
+                "answer": "A"
+            },
+            {
+                "id": 4,
+                "chapter": 1,
+                "type": "single",
+                "question": "中国共产党提出新民主主义革命的基本思想是在()",
+                "options": [
+                    "A.国民革命战争时期",
+                    "B.土地革命战争时期",
+                    "C.抗日战争时期",
+                    "D.解放战争时期"
+                ],
+                "answer": "A"
+            },
+            {
+                "id": 5,
+                "chapter": 1,
+                "type": "single",
+                "question": "以毛泽东为代表的中国共产党人初步开辟了农村包围城市、武装夺取政权革命道路是在()",
+                "options": [
+                    "A.国民革命战争时期",
+                    "B.土地革命战争时期",
+                    "C.抗日战争时期",
+                    "D.解放战争时期"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 6,
+                "chapter": 1,
+                "type": "single",
+                "question": "在土地革命战争后期和抗日战争时期，毛泽东思想得到多方面展开而达到成熟，其标志是()",
+                "options": [
+                    "A.思想政治工作和文化工作理论的系统提出",
+                    "B.新民主主义革命理论的系统阐明",
+                    "C.人民民主专政理论的完整论述",
+                    "D.农村包围城市和武装夺政权的科学概括"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 7,
+                "chapter": 1,
+                "type": "single",
+                "question": "正式把毛泽东思想写入党章，并确立为党必须长期坚持的指导思想的是在()",
+                "options": [
+                    "A.遵义会议",
+                    "B.党的六届六中全会",
+                    "C.党的七大",
+                    "D.党的七届二中全会"
+                ],
+                "answer": "C"
+            },
+            {
+                "id": 8,
+                "chapter": 1,
+                "type": "single",
+                "question": "毛泽东思想是被实践证明了的关于()的正确的理论原则和经验总结。",
+                "options": [
+                    "A.新民主主义革命",
+                    "B.社会主义革命",
+                    "C.中国革命和建设",
+                    "D.社会主义建设"
+                ],
+                "answer": "C"
+            },
+            {
+                "id": 9,
+                "chapter": 1,
+                "type": "single",
+                "question": "()是贯串于毛泽东思想各个方面的根本点",
+                "options": [
+                    "A.实事求是",
+                    "B.群众路线",
+                    "C.独立自主",
+                    "D.艰苦奋斗"
+                ],
+                "answer": "A"
+            },
+            {
+                "id": 10,
+                "chapter": 1,
+                "type": "single",
+                "question": "中国共产党的根本工作路线是()",
+                "options": [
+                    "A.实事求是",
+                    "B.群众路线",
+                    "C.自力更生",
+                    "D.独立自主"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 11,
+                "chapter": 1,
+                "type": "multi",
+                "question": "第一次国内革命战争时期，毛泽东提出的新民主主义革命基本思想主要体现在以下著作中()",
+                "options": [
+                    "A.《星星之火，可以燎原》",
+                    "B.《中国社会各阶级的分析》",
+                    "C.《中国的红色政权为什么能够存在》",
+                    "D.《湖南农民运动考察报告》"
+                ],
+                "answer": ["B", "D"]
+            },
+            {
+                "id": 12,
+                "chapter": 1,
+                "type": "multi",
+                "question": "体现毛泽东思想的继续丰富和发展的著作是()",
+                "options": [
+                    "A.《论十大关系》",
+                    "B.《论人民民主专政》",
+                    "C.《共产党人发刊词》",
+                    "D.《关于正确处理人民内部矛盾的问题》"
+                ],
+                "answer": ["A", "B", "D"]
+            },
+            {
+                "id": 13,
+                "chapter": 1,
+                "type": "multi",
+                "question": "毛泽东思想活的灵魂是()",
+                "options": [
+                    "A.实事求是",
+                    "B.群众路线",
+                    "C.批评与自我批评",
+                    "D.独立自主"
+                ],
+                "answer": ["A", "B", "D"]
+            },
+            {
+                "id": 14,
+                "chapter": 1,
+                "type": "multi",
+                "question": "毛泽东思想的历史地位主要表现为()",
+                "options": [
+                    "A.是马克思主义中国化的第一个重大理论成果",
+                    "B.是中国革命和建设的科学指南",
+                    "C.是中国共产党和中国人民宝贵的精神财富",
+                    "D.是新时期全党全国各族人民团结奋斗的共同思想基础"
+                ],
+                "answer": ["A", "B", "C"]
+            },
+            {
+                "id": 15,
+                "chapter": 1,
+                "type": "multi",
+                "question": "正确认识毛泽东思想的历史地位和指导意义,必须科学评价毛泽东和毛泽东思想。这个问题的解决()",
+                "options": [
+                    "A.关系到怎样看待党和国家过去几十年奋斗和前进的历史",
+                    "B.关系到党的团结、国家的安定",
+                    "C.关系到党和国家未来的发展前途",
+                    "D.不仅有重要的历史意义，而且有重要的现实意义"
+                ],
+                "answer": ["A", "B", "C", "D"]
+            },
+            {
+                "id": 16,
+                "chapter": 1,
+                "type": "judge",
+                "question": "毛泽东思想就是毛泽东个人的思想",
+                "options": [
+                    "A.对",
+                    "B.错"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 17,
+                "chapter": 1,
+                "type": "judge",
+                "question": "毛泽东思想是中国化的马克思主义，因此，毛泽东思想不完全是马克思主义的。",
+                "options": [
+                    "A.对",
+                    "B.错"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 18,
+                "chapter": 1,
+                "type": "judge",
+                "question": "解决中国革命和建设过程中的实际问题是毛泽东思想产生的直接推动力。",
+                "options": [
+                    "A.对",
+                    "B.错"
+                ],
+                "answer": "A"
+            },
+            {
+                "id": 19,
+                "chapter": 1,
+                "type": "judge",
+                "question": "毛泽东思想是依据马克思列宁主义原理提出来的,毛泽东思想与马克思列宁主义同属于一个思想体系,二者并列。",
+                "options": [
+                    "A.对",
+                    "B.错"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 20,
+                "chapter": 1,
+                "type": "judge",
+                "question": "从十月革命和五四运动的历史实际中，毛泽东开始看到人民大众显示出来的巨大力量，明确提出实行社会改造的根本的方法,即民众的大联合。",
+                "options": [
+                    "A.对",
+                    "B.错"
+                ],
+                "answer": "A"
+            },
+            {
+                "id": 21,
+                "chapter": 1,
+                "type": "judge",
+                "question": "毛泽东思想形成和发展的历史条件,与我们今天面临的形势和任务有很大的不同,使得毛泽东思想的时代价值有所减弱和减低。",
+                "options": [
+                    "A.对",
+                    "B.错"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 22,
+                "chapter": 1,
+                "type": "judge",
+                "question": "党的中央领导真正认识到必须把马克思列宁主义应用到中国的实践中去的重要性是在1935年遵义会议以后，而就全党来说，则是在延安整风之后。",
+                "options": [
+                    "A.对",
+                    "B.错"
+                ],
+                "answer": "A"
+            },
+            // 第二章
+            {
+                "id": 1,
+                "chapter": 2,
+                "type": "single",
+                "question": "解决中国革命问题的基本前提是",
+                "options": [
+                    "A.分清敌人和朋友",
+                    "B.认清中国国情",
+                    "C.坚持无产阶级领导权",
+                    "D.建立工农联盟"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 2,
+                "chapter": 2,
+                "type": "single",
+                "question": "近代中国的社会性质是",
+                "options": [
+                    "A.封建社会",
+                    "B.殖民地",
+                    "C.资本主义社会",
+                    "D.半殖民地半封建社会"
+                ],
+                "answer": "D"
+            },
+            {
+                "id": 3,
+                "chapter": 2,
+                "type": "single",
+                "question": "近代中国革命以()为开端，进入新民主主义革命阶段",
+                "options": [
+                "A.戊戌变法",
+                "B.辛亥革命",
+                "C.五四运动",
+                "D.中国共产党的成立"
+                ],
+                "answer": "C"
+            },
+            {
+                "id": 4,
+                "chapter": 2,
+                "type": "single",
+                "question": "中国革命的首要问题是",
+                "options": [
+                "A.认清革命的性质",
+                "B.认清革命发展前途",
+                "C.认清革命的敌人和朋友",
+                "D.认清革命"
+                ],
+                "answer": "C"
+            },
+            {
+                "id": 5,
+                "chapter": 2,
+                "type": "single",
+                "question": "中国革命的首要对象是",
+                "options": [
+                "A.资产阶级",
+                "B.官僚资本主义",
+                "C.帝国主义",
+                "D.封建主义"
+                ],
+                "answer": "C"
+            },
+            {
+                "id": 6,
+                "chapter": 2,
+                "type": "single",
+                "question": "新民主主义革命最基本的动力是",
+                "options": [
+                "A.无产阶级",
+                "B.农民阶级",
+                "C.贫农",
+                "D.工人和农民"
+                ],
+                "answer": "A"
+            },
+            {
+                "id": 7,
+                "chapter": 2,
+                "type": "single",
+                "question": "新民主主义革命的主力军是",
+                "options": [
+                "A.工人阶级",
+                "B.农民阶",
+                "C.民族资产阶级",
+                "D.小资产阶级"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 8,
+                "chapter": 2,
+                "type": "single",
+                "question": "新民主主义革命的基本问题是",
+                "options": [
+                "A.无产阶级领导权问题",
+                "B.农民问题",
+                "C.武装斗争问题",
+                "D.工农联盟问题"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 9,
+                "chapter": 2,
+                "type": "single",
+                "question": "新民主主义革命的中心问题是",
+                "options": [
+                "A.无产阶级的领导权",
+                "B.农民阶级的主力军地位",
+                "C.民族资产阶级的领导权",
+                "D.无产阶级同资产阶级的联盟"
+                ],
+                "answer": "A"
+            },
+            {
+                "id": 10,
+                "chapter": 2,
+                "type": "single",
+                "question": "毛泽东所说的中国民族资产阶级'从娘肚子里带出来的老毛病'是指",
+                "options": [
+                "A.软弱性",
+                "B.妥协性",
+                "C.动摇性",
+                "D.两面性"
+                ],
+                "answer": "A"
+            },
+            {
+                "id": 11,
+                "chapter": 2,
+                "type": "single",
+                "question": "区别新民主主义革命与旧民主主义革命的根本标志是",
+                "options": [
+                "A.革命指导思想不同",
+                "B.革命领导权不同",
+                "C.革命前途不同",
+                "D.革命对象不同"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 12,
+                "chapter": 2,
+                "type": "multi",
+                "question": "近代中国社会的主要矛盾是",
+                "options": [
+                "A.帝国主义和中华民族的矛盾",
+                "B.地主阶级和农民阶级的矛盾",
+                "C.封建主义和人民大众的矛盾",
+                "D.帝国主义和中华民族的矛盾是各种矛盾中最主要的矛盾"
+                ],
+                "answer": ["A", "C"]
+            },
+            {
+                "id": 13,
+                "chapter": 2,
+                "type": "multi",
+                "question": "毛泽东指出，新民主主义革命对象包括",
+                "options": [
+                "A.资产阶级",
+                "B.官僚资本主义",
+                "C.帝国主义",
+                "D.封建主义"
+                ],
+                "answer": ["B", "C", "D"]
+            },
+            {
+                "id": 14,
+                "chapter": 2,
+                "type": "multi",
+                "question": "新民主主义革命的动力包括",
+                "options": [
+                "A.工人阶级",
+                "B.农民阶级",
+                "C.城市小资产阶级",
+                "D.民族资产阶级"
+                ],
+                "answer": ["A", "B", "C", "D"]
+            },
+            {
+                "id": 15,
+                "chapter": 2,
+                "type": "multi",
+                "question": "近代中国无产阶级具有的自身特点和优点包括",
+                "options": [
+                "A.深受帝国主义、封建主义和资本主义的三重压迫，革命坚决彻底",
+                "B.与农民有着天然的联系，便于结成工农联盟",
+                "C.人数虽少，但很集中，便于组织",
+                "D.没有任何生产资料"
+                ],
+                "answer": ["A", "B", "C"]
+            },
+            {
+                "id": 1,
+                "chapter": 3,
+                "type": "single",
+                "question": "中国共产党提出由新民主主义社会和平过渡到社会主义社会的最初设想是",
+                "options": [
+                "A.民主革命时期",
+                "B.中华人民共和国成立后",
+                "C.社会主义改造完成后",
+                "D.'文化大革命'时期"
+                ],
+                "answer": "A"
+            },
+            {
+                "id": 2,
+                "chapter": 3,
+                "type": "single",
+                "question": "1952年底,随着土地改革的基本完成,我国社会的主要矛盾已转变成",
+                "options": [
+                "A.人民大众同帝国主义、封建主义及其走狗国民党反动派残余的矛盾",
+                "B.帝国主义和中华民族的矛盾、封建主义和人民大众的矛盾",
+                "C.工人阶级同资产阶级的矛盾、社会主义道路同资本主义道路的矛盾",
+                "D.人民日益增长的物质文化需要同落后的社会生产之间的矛盾"
+                ],
+                "answer": "C"
+            },
+            {
+                "id": 3,
+                "chapter": 3,
+                "type": "single",
+                "question": "新民主主义社会中,处于领导地位的经济成分是",
+                "options": [
+                "A.个体经济",
+                "B.私人和国家资本主义经济",
+                "C.国营经济",
+                "D.合作社经济"
+                ],
+                "answer": "C"
+            },
+            {
+                "id": 4,
+                "chapter": 3,
+                "type": "single",
+                "question": "建国初期,我国社会主义国营经济建立的最主要途径和手段是",
+                "options": [
+                "A.没收帝国主义在华企业",
+                "B.没收官僚资本",
+                "C.没收民族资本",
+                "D.没收地主阶级的土地和财产"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 5,
+                "chapter": 3,
+                "type": "single",
+                "question": "从中华人民共和国成立到社会主义改造基本完成,是我国从新民主主义到社会主义的过渡时期,这一时期,个体经济向社会主义集体经济过渡的形式是",
+                "options": [
+                "A.国营经济",
+                "B.私人资本主义经济",
+                "C.国家资本主义经济",
+                "D.合作社经济"
+                ],
+                "answer": "D"
+            },
+            {
+                "id": 6,
+                "chapter": 3,
+                "type": "single",
+                "question": "毛泽东关于农业社会主义改造理论来源是",
+                "options": [
+                "A.马克思的合作化理论",
+                "B.恩格斯的合作化理论",
+                "C.列宁的合作化理论",
+                "D.斯大林的合作化理论"
+                ],
+                "answer": "C"
+            },
+            {
+                "id": 7,
+                "chapter": 3,
+                "type": "single",
+                "question": "标志着资本主义工商业的社会主义改造已经基本完成是实现了",
+                "options": [
+                "A.手工业合作社的建立",
+                "B.农业合作化",
+                "C.全行业公私合营",
+                "D.生产责任制"
+                ],
+                "answer": "C"
+            },
+            {
+                "id": 8,
+                "chapter": 3,
+                "type": "single",
+                "question": "过渡时期总路线的主体是",
+                "options": [
+                "A.国家的社会主义工业化",
+                "B.私营经济的国有化",
+                "C.个体农业的集体化",
+                "D.对个体农业、手工业和资本主义工商业的改造"
+                ],
+                "answer": "A"
+            },
+            {
+                "id": 9,
+                "chapter": 3,
+                "type": "single",
+                "question": "关于社会主义过渡时期总路线错误的说法是",
+                "options": [
+                "A.实现社会主义工业化,农业、手工业和资本主义工商业的社会主义改造",
+                "B.过渡时期结束的标志是社会主义改造结束",
+                "C.以单一的社会主义公有制和计划经济体制为目标",
+                "D.以中国特色社会主义为目标"
+                ],
+                "answer": "D"
+            },
+            {
+                "id": 10,
+                "chapter": 3,
+                "type": "single",
+                "question": "党在过渡时期总路线的实质是",
+                "options": [
+                "A.改变生产资料的私有制",
+                "B.发展生产力",
+                "C.消灭剥削阶级",
+                "D.改造个体农民和手工业者"
+                ],
+                "answer": "A"
+            },
+            {
+                "id": 11,
+                "chapter": 3,
+                "type": "single",
+                "question": "中国社会主义改造和社会主义建设道路中一个十分突出的特殊问题是",
+                "options": [
+                "A.一个落后的农业国的工业化问题",
+                "B.农业的社会主义改造问题",
+                "C.农业的机械化问题",
+                "D.民族资本主义工商业的社会主义改造问题"
+                ],
+                "answer": "A"
+            },
+            {
+                "id": 12,
+                "chapter": 3,
+                "type": "single",
+                "question": "制定我国第一个五年计划的依据是",
+                "options": [
+                "A.国民经济的恢复和发展",
+                "B.土地改革的完成",
+                "C.实现国家工业化",
+                "D.过渡时期的总路线"
+                ],
+                "answer": "D"
+            },
+            {
+                "id": 13,
+                "chapter": 3,
+                "type": "single",
+                "question": "中国共产党对个体农业和手工业实行社会主义改造的方针是",
+                "options": [
+                "A.趁热打铁,积极领导",
+                "B.自愿互利,国家帮助",
+                "C.积极领导,稳步前进",
+                "D.国家帮助,典型示范"
+                ],
+                "answer": "C"
+            },
+            {
+                "id": 14,
+                "chapter": 3,
+                "type": "single",
+                "question": "我国在手工业的社会主义改造过程中所办的手工业生产合作社属于",
+                "options": [
+                "A.社会主义性质",
+                "B.半社会主义性质",
+                "C.社会主义萌芽性质",
+                "D.非社会主义性质"
+                ],
+                "answer": "A"
+            },
+            {
+                "id": 15,
+                "chapter": 3,
+                "type": "single",
+                "question": "中国共产党对资本主义工商业进行社会主义改造的主要方式是",
+                "options": [
+                "A.和平赎买",
+                "B.统购统销",
+                "C.公私合营",
+                "D.合作化"
+                ],
+                "answer": "A"
+            },
+            {
+                "id": 16,
+                "chapter": 3,
+                "type": "single",
+                "question": "我国对资本主义工商业改造创造了国家资本主义的各种形式,其高级形式",
+                "options": [
+                "A.统购包销",
+                "B.委托加工,计划订货",
+                "C.经销、代销",
+                "D.公私合营"
+                ],
+                "answer": "D"
+            },
+            {
+                "id": 17,
+                "chapter": 3,
+                "type": "single",
+                "question": "我国在对资产阶级工商业实行社会主义改造的过程中,国家向私营企业投资入股,企业生产资料由国家和资本家共同所有,利润分配仍然实行'四马分肥',国家向企业派出公方代表,与工人、资本家共同管理和改造企业,公方代表居领导地位。这时的企业性质",
+                "options": [
+                "A.仍然属于私营企业",
+                "B.属于半社会主义性质",
+                "C.具有了社会主义因素",
+                "D.基本上属于社会主义国营性质"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 18,
+                "chapter": 3,
+                "type": "single",
+                "question": "在我国的过渡性质时期,民族资产阶级与工人阶级的矛盾性质是",
+                "options": [
+                "A.对抗性的",
+                "B.非对抗性的",
+                "C.既有对抗性一面又有非对抗性的一面",
+                "D.没有矛盾"
+                ],
+                "answer": "C"
+            },
+            {
+                "id": 19,
+                "chapter": 3,
+                "type": "single",
+                "question": "我国进入社会主义初级阶段的起点及剥削阶级和剥削制度被消灭的标志是",
+                "options": [
+                "A.社会主义改造的完成",
+                "B.国民经济恢复任务的完成",
+                "C.中华人民共和国的成立",
+                "D.中共十三大的召开"
+                ],
+                "answer": "A"
+            },
+            {
+                "id": 20,
+                "chapter": 3,
+                "type": "single",
+                "question": "1956年,社会主义改造基本完成以后,我国社会的主要矛盾是",
+                "options": [
+                "A.工人阶级和资产阶级的矛盾",
+                "B.社会主义道路和资本主义道路之间的矛盾",
+                "C.人民日益增长的物质文化生活需要同落后的社会生产之间的矛盾",
+                "D.坚持思想基本原则和资产阶级自由化之间的矛盾"
+                ],
+                "answer": "C"
+            },
+            {
+                "id": 21,
+                "chapter": 3,
+                "type": "multi",
+                "question": "关于中国新民主主义社会,下列说法正确的是",
+                "options": [
+                "A.就全国范围来讲,它是指从1949年中华人民共和国的成立到1956年社会主义改造的基本完成",
+                "B.它是一个过渡性质的社会,类似于马克思列宁所说的过渡时期",
+                "C.它从属于社会主义范畴",
+                "D.它与社会主义初级阶段本质上是相同的"
+                ],
+                "answer": ["A", "B", "C"]
+            },
+            {
+                "id": 22,
+                "chapter": 3,
+                "type": "multi",
+                "question": "从中华人民共和国成立到社会主义改造基本完成,是我国从新民主主义到社会主义的过渡时期。这一时期中国社会的阶级构成主要包括",
+                "options": [
+                "A.工人阶级",
+                "B.农民阶级",
+                "C.民族资产阶级",
+                "D.城市小资产阶级"
+                ],
+                "answer": ["A", "B", "C", "D"]
+            },
+            {
+                "id": 23,
+                "chapter": 3,
+                "type": "multi",
+                "question": "在新民主主义社会中,主要的经济成分有哪几种",
+                "options": [
+                "A.合作社经济",
+                "B.个体经济",
+                "C.社会主义经济",
+                "D.资本主义经济"
+                ],
+                "answer": ["B", "C", "D"]
+            },
+            {
+                "id": 24,
+                "chapter": 3,
+                "type": "multi",
+                "question": "1952年党中央在酝酿过渡时期总路线时,毛泽东把实现向社会主义转变的设想,由建国之初的'先搞工业化建设'再一举过渡,改变为'建设和改造同时并举,逐步过渡',这一改变原因和条件是",
+                "options": [
+                "A.我国社会主义经济因素的不断增长和对资本主义经济的限制",
+                "B.为了确定我国工业化建设的社会主义方向",
+                "C.我国工业化建设取得了重大成就",
+                "D.民主革命的遗留任务已经完成"
+                ],
+                "answer": ["A", "B", "D"]
+            },
+            {
+                "id": 25,
+                "chapter": 3,
+                "type": "multi",
+                "question": "新中国对个体手工业社会主义改造的主要形式有",
+                "options": [
+                "A.供销组",
+                "B.供销合作社",
+                "C.生产合作社",
+                "D.公私合营"
+                ],
+                "answer": ["A", "B", "C"]
+            },
+            {
+                "id": 26,
+                "chapter": 3,
+                "type": "multi",
+                "question": "上世纪50年代,我国在对资本主义工商业进行社会主义改造过程中创造的国家资本主义的具体形式有",
+                "options": [
+                "A.加工订货",
+                "B.统购包销",
+                "C.经销代销",
+                "D.公私合营"
+                ],
+                "answer": ["A", "B", "C", "D"]
+            },
+            {
+                "id": 27,
+                "chapter": 3,
+                "type": "multi",
+                "question": "我国对资本主义工商业进行社会主义改造的经验有",
+                "options": [
+                "A.严格区别官僚资本和民族资本的界限,实行了和平赎买,和平地实现了和平关系的深刻变革",
+                "B.创造了国家资本主义的多种形式,采取了由低级到高级逐步过渡的形势",
+                "C.把对企业的改造和对资本家的改造结合起来,把资本家改造成自食其力的劳动者",
+                "D.对私人资本主义的赎买政策应始终坚持'四马分肥'"
+                ],
+                "answer": ["A", "B", "C"]
+            },
+            {
+                "id": 28,
+                "chapter": 3,
+                "type": "multi",
+                "question": "新中国对民族资产阶级实行和平赎买的必要性在于",
+                "options": [
+                "A.民族资产阶级经济实力雄厚,掌握国家经济命脉",
+                "B.民族资产阶级有一定的技术专长和管理经验",
+                "C.民族资产阶级经济构成整个国民经济的基础",
+                "D.中国经济落后,需要利用民族资本主义经济有利于国计民生的一面"
+                ],
+                "answer": ["B", "D"]
+            },
+            {
+                "id": 29,
+                "chapter": 3,
+                "type": "multi",
+                "question": "我国社会主义改造是一场伟大的社会变革,但是在改造过程中也出现了一些偏差,遗留了一些问题,具体表现在",
+                "options": [
+                "A.所有制结构过于单一,在社会主义公有制已居于绝对统治地位的条件下,没有限度地保留一部分有益于国计民生的个体经济和私营经济",
+                "B.高度集中的计划经济体制也随之扩大到整个社会经济生活",
+                "C.在一定程度上排斥了商品经济和市场经济的正常运行",
+                "D.要求过急,发展过快,工作过粗,改造形式过于简单"
+                ],
+                "answer": ["A", "B", "C", "D"]
+            },
+            {
+                "id": 30,
+                "chapter": 3,
+                "type": "multi",
+                "question": "中国共产党根据马克思列宁主义关于农业社会主义改造的思想,从我国的实际出发,开创了一条有中国特点的农业合作化道路,成功实现了对个体农业的社会主义改造,其成功经验主要有",
+                "options": [
+                "A.在土地改革基础上,不失时机地引导个体农民走互助合作道路",
+                "B.遵循自愿互利、典型示范、国家帮助的原则",
+                "C.实行'三级所有、队为基础'的农村集体经济体制",
+                "D.采取从互助组到初级合作社到高级合作社的逐步过渡形式"
+                ],
+                "answer": ["A", "B", "D"]
+            },
+            {
+                "id": 1,
+                "chapter": 4,
+                "type": "single",
+                "question": "毛泽东明确提出以苏为鉴,独立自主地探索适合中国情况的社会主义建设道路的著作是",
+                "options": [
+                "A.《论十大关系》",
+                "B.《新民主主义论》",
+                "C.《关于正确处理人民内部矛盾的问题》",
+                "D.《中国革命和中国共产党》"
+                ],
+                "answer": "A"
+            },
+            {
+                "id": 2,
+                "chapter": 4,
+                "type": "single",
+                "question": "成为党探索中国社会主义建设道路良好开端的文章,是毛泽东发表的",
+                "options": [
+                "A.《论人民民主专政》",
+                "B.《论十大关系》",
+                "C.《纪念孙中山先生》",
+                "D.《关于正确处理人民内部矛盾的问题》"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 3,
+                "chapter": 4,
+                "type": "single",
+                "question": "《论十大关系》的报告围绕的基本方针是",
+                "options": [
+                "A.独立自主",
+                "B.自力更生为主,争取外援为辅",
+                "C.调动一切积极因素,为社会主义事业服务",
+                "D.走中国特色社会主义道路"
+                ],
+                "answer": "C"
+            },
+            {
+                "id": 4,
+                "chapter": 4,
+                "type": "single",
+                "question": "《论十大关系》的前五条主要讨论经济问题,其中前三条讲重工业和轻工业、农业的关系,沿海工业和内地工业的关系,经济建设和国防建设的关系。这实际上明确提出了",
+                "options": [
+                "A.中国的工业化道路问题",
+                "B.中国的经济建设问题",
+                "C.中国的工业发展问题",
+                "D.工业发展的平衡问题"
+                ],
+                "answer": "A"
+            },
+            {
+                "id": 5,
+                "chapter": 4,
+                "type": "single",
+                "question": "不属于《论十大关系》讨论范畴的是",
+                "options": [
+                "A.社会主义市场经济和计划经济的关系",
+                "B.重工业和轻工业、农业的关系",
+                "C.国家、生产单位和生产者个人的关系",
+                "D.革命和反革命的关系"
+                ],
+                "answer": "A"
+            },
+            {
+                "id": 6,
+                "chapter": 4,
+                "type": "single",
+                "question": "党的八大正确分析了社会主义改造完成后我国社会主要矛盾的变化,提出今后党和国家的工作重点是",
+                "options": [
+                "A.调动一切积极因素,为社会主义事业服务",
+                "B.正确处理人民内部矛盾,巩固社会主义制度",
+                "C.集中力量发展生产力,建设社会主义现代化强国",
+                "D.技术革命和社会主义建设"
+                ],
+                "answer": "C"
+            },
+            {
+                "id": 7,
+                "chapter": 4,
+                "type": "single",
+                "question": "毛泽东系统论述社会主义社会矛盾理论的著作是",
+                "options": [
+                "A.《关于正确处理人民内部矛盾的问题》",
+                "B.《新民主主义论》",
+                "C.《论十大关系》",
+                "D.《中国社会各阶级的分析》"
+                ],
+                "answer": "A"
+            },
+            {
+                "id": 8,
+                "chapter": 4,
+                "type": "single",
+                "question": "毛泽东在《关于正确处理人民内部矛盾的问题》的报告中指出,社会主义社会的基本矛盾是",
+                "options": [
+                "A.人民内部的非对抗性的矛盾",
+                "B.生产关系和生产力之间、上层建筑和经济基础之间的矛盾",
+                "C.无产阶级和资产阶级之间、社会主义和资本主义之间的矛盾",
+                "D.人民日益增长的物质文化需要同落后的社会生产之间的矛盾"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 9,
+                "chapter": 4,
+                "type": "single",
+                "question": "毛泽东认为社会主义社会基本矛盾的特点是",
+                "options": [
+                "A.相适应",
+                "B.相矛盾",
+                "C.又相适应又相矛盾",
+                "D.不相适应又不相矛盾"
+                ],
+                "answer": "C"
+            },
+            {
+                "id": 10,
+                "chapter": 4,
+                "type": "single",
+                "question": "毛泽东认为,解决社会主义基本矛盾的途径和方法是",
+                "options": [
+                "A.经过革命",
+                "B.经过社会主义制度本身来解决",
+                "C.经过发展生产力",
+                "D.经过改变社会主义制度"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 11,
+                "chapter": 4,
+                "type": "single",
+                "question": "下列不属于人民内部矛盾的是",
+                "options": [
+                "A.工人阶级和农民阶级的矛盾",
+                "B.工人、农民同知识分子之间的矛盾",
+                "C.敌对分子、敌对势力与人民的矛盾",
+                "D.民主同集中的矛盾"
+                ],
+                "answer": "C"
+            },
+            {
+                "id": 12,
+                "chapter": 4,
+                "type": "single",
+                "question": "人民内部矛盾是",
+                "options": [
+                "A.分清是非的问题",
+                "B.分清你我的问题",
+                "C.分清敌我的问题",
+                "D.分清对错的问题"
+                ],
+                "answer": "A"
+            },
+            {
+                "id": 13,
+                "chapter": 4,
+                "type": "single",
+                "question": "解决敌我矛盾应采用",
+                "options": [
+                "A.说服的方法",
+                "B.专政的方法",
+                "C.民主的方法",
+                "D.教育的方法"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 14,
+                "chapter": 4,
+                "type": "single",
+                "question": "毛泽东在1957年2月所作的《关于正确处理人民内部矛盾的问题》的报告中,系统论述了社会主义社会矛盾的理论。毛泽东强调,社会主义国家政治生活的主题是",
+                "options": [
+                "A.正确区分和处理两类不同性质矛盾的问题",
+                "B.正确处理人民内部矛盾的问题",
+                "C.正确处理敌我矛盾的问题",
+                "D.正确认识和处理阶级斗争的问题"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 15,
+                "chapter": 4,
+                "type": "single",
+                "question": "关于人民内部矛盾表述正确的是",
+                "options": [
+                "A.人民内部矛盾是由于人民根本利益不一致导致的",
+                "B.领导同被领导之间的矛盾属于人民内部矛盾",
+                "C.工人阶级和民族资产阶级之间的矛盾不属于人民内部矛盾",
+                "D.人民内部矛盾是固定不变的,不会随条件的变化而发生转化"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 16,
+                "chapter": 4,
+                "type": "single",
+                "question": "在人民民主专政体制下,正确处理两类不同性质社会矛盾的基本方法是",
+                "options": [
+                "A.依法严惩和说服教育",
+                "B.暴力镇压和说服教育",
+                "C.批评和团结",
+                "D.专政和民主"
+                ],
+                "answer": "D"
+            },
+            {
+                "id": 17,
+                "chapter": 4,
+                "type": "single",
+                "question": "毛泽东明确提出要走一条有别于苏联的中国工业化道路的著述是",
+                "options": [
+                "A.《论十大关系》",
+                "B.《关于正确处理人民内部矛盾的问题》",
+                "C.《为争取国家财政经济状况基本好转而斗争》",
+                "D.《在扩大的中央工作会议上的讲话》"
+                ],
+                "answer": "A"
+            },
+            {
+                "id": 18,
+                "chapter": 4,
+                "type": "single",
+                "question": "促使我党思考和探索如何走中国工业化道路的直接原因是",
+                "options": [
+                "A.以苏为鉴,吸取苏联在建设社会主义中的教训",
+                "B.我国重工业、农业和轻工业发展的比例失调",
+                "C.我国生产力落后,经济基础薄弱",
+                "D.受苏联的影响,强调重工业的发展"
+                ],
+                "answer": "A"
+            },
+            {
+                "id": 19,
+                "chapter": 4,
+                "type": "single",
+                "question": "走中国工业化道路的关键问题是",
+                "options": [
+                "A.正确处理重工业和轻工业、农业的关系",
+                "B.正确处理人民内部的矛盾",
+                "C.正确处理两类不同性质的矛盾",
+                "D.调动一切积极因素为社会主义建设服务"
+                ],
+                "answer": "A"
+            },
+            {
+                "id": 20,
+                "chapter": 4,
+                "type": "single",
+                "question": "我国走工业化道路的根本原因是",
+                "options": [
+                "A.新中国的工业基础十分薄弱",
+                "B.中国民族工业发展已经具有了深厚的基础",
+                "C.是中国共产党重视国家工业化的一贯政策",
+                "D.实现民族独立和国家富强的内在要求和必要条件"
+                ],
+                "answer": "D"
+            },
+            {
+                "id": 21,
+                "chapter": 4,
+                "type": "single",
+                "question": "实现我国工业化应坚持的方针不包括",
+                "options": [
+                "A.'两条腿走路'",
+                "B.农业为基础,工业为主导,以农轻重为序",
+                "C.中央工业和地方工业并举",
+                "D.国家、生产单位和生产者个人利益兼顾"
+                ],
+                "answer": "D"
+            },
+            {
+                "id": 22,
+                "chapter": 4,
+                "type": "single",
+                "question": "在社会主义建设道路初步探索过程中,关于生产资料所有制调整方面,提出了'三个主体,三个补充'设想的是",
+                "options": [
+                "A.毛泽东",
+                "B.刘少奇",
+                "C.陈云",
+                "D.邓小平"
+                ],
+                "answer": "C"
+            },
+            {
+                "id": 23,
+                "chapter": 4,
+                "type": "single",
+                "question": "我党提出的'三个主体、三个补充'意味着",
+                "options": [
+                "A.社会主义国家要消除商品经济",
+                "B.发展商品生产会导致资本主义",
+                "C.在我国经济建设发展过程中,也要发挥非公有制经济和市场的作用",
+                "D.商品经济是资本主义的本质特征"
+                ],
+                "answer": "C"
+            },
+            {
+                "id": 24,
+                "chapter": 4,
+                "type": "single",
+                "question": "党的八大提出的经济建设的正确方针是",
+                "options": [
+                "A.统筹兼顾,全面安排",
+                "B.既反保守又反冒进、在综合平衡中稳步前进",
+                "C.团结互助,统筹兼顾",
+                "D.具体问题具体分析"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 25,
+                "chapter": 4,
+                "type": "multi",
+                "question": "1956年起,毛泽东开始探索适合中国特点的社会主义建设道路。与此相联系,毛泽东提出了一系列新思想,主要有",
+                "options": [
+                "A.强调独立自主地探索适合中国情况的社会主义建设道路",
+                "B.提出以苏联为鉴",
+                "C.提出马克思主义同中国实际的'第二次结合'",
+                "D.强调改革开放"
+                ],
+                "answer": ["A", "B", "C"]
+            },
+            {
+                "id": 26,
+                "chapter": 4,
+                "type": "multi",
+                "question": "关于社会主义现代化建设的积极因素表述正确的是",
+                "options": [
+                "A.积极因素处于主导、统治地位",
+                "B.是社会主义事业必定胜利的可靠保证",
+                "C.积极因素与消极因素在一定条件下是可以互相转化的",
+                "D.积极因素和消极因素是对立统一的关系"
+                ],
+                "answer": ["A", "B", "C", "D"]
+            },
+            {
+                "id": 27,
+                "chapter": 4,
+                "type": "multi",
+                "question": "中国共产党在探索中国建设道路过程中的理论成果有",
+                "options": [
+                "A.毛泽东《论十大关系》的发表",
+                "B.党在过渡时期总路线的制定",
+                "C.中共'八大'制定的路线",
+                "D.毛泽东《关于正确处理人民内部矛盾的问题》的重要讲话"
+                ],
+                "answer": ["A", "C", "D"]
+            },
+            {
+                "id": 28,
+                "chapter": 4,
+                "type": "multi",
+                "question": "关于《论十大关系》的表述正确的有",
+                "options": [
+                "A.它是新中国成立以来中央领导集体深入调查研究的成果",
+                "B.它为中共八大的召开作了理论准备",
+                "C.探讨了中央与地方的关系",
+                "D.探讨了沿海工业和内地工业的关系"
+                ],
+                "answer": ["A", "B", "C", "D"]
+            },
+            {
+                "id": 29,
+                "chapter": 4,
+                "type": "multi",
+                "question": "社会主义改造的任务完成以后,我国社会的基本矛盾是",
+                "options": [
+                "A.敌我矛盾",
+                "B.人民内部矛盾",
+                "C.生产力和生产关系的矛盾",
+                "D.经济基础和上层建筑的矛盾"
+                ],
+                "answer": ["C", "D"]
+            },
+            {
+                "id": 30,
+                "chapter": 4,
+                "type": "multi",
+                "question": "党的八大正确分析了社会主义改造完成后我国社会主要矛盾的变化,指出,社会主义制度在我国已经基本上建立起来了。我们国内的主要矛盾,已经是",
+                "options": [
+                "A.人民日益增长的物质文化需要同落后的社会生产之间的矛盾",
+                "B.人民对于建立先进的工业国的要求同落后的农业国的现实之间的矛盾",
+                "C.人民对于经济文化迅速发展的需要同当前经济文化不能满足人民需要的状况之间的矛盾",
+                "D.无产阶级和资产阶级的矛盾"
+                ],
+                "answer": ["B", "C"]
+            },
+            {
+                "id": 31,
+                "chapter": 4,
+                "type": "multi",
+                "question": "关于社会主义两类不同性质的矛盾表述正确的有",
+                "options": [
+                "A.反映在政治上可以划分为敌我矛盾和人民内部矛盾",
+                "B.人民内部矛盾是非对抗性的矛盾,处理不当就转化为对抗性的矛盾",
+                "C.用专政、说服教育的方法解决敌我矛盾",
+                "D.人民同反抗社会主义主义革命的社会势力和社会集团的矛盾属于人民内部矛盾"
+                ],
+                "answer": ["A", "B"]
+            },
+            {
+                "id": 32,
+                "chapter": 4,
+                "type": "multi",
+                "question": "毛泽东在《论十大关系》中指出,正确处理人民内部矛盾的方针、原则包括",
+                "options": [
+                "A.'团结-批评-团结'",
+                "B.实行统筹兼顾、适当安排的方针",
+                "C.'百花齐放、百家争鸣'",
+                "D.'长期共存,互相监督'"
+                ],
+                "answer": ["A", "B", "C", "D"]
+            },
+            {
+                "id": 33,
+                "chapter": 4,
+                "type": "multi",
+                "question": "毛泽东提出的社会主义现代化建设'两步走'的发展战略是",
+                "options": [
+                "A.第一步建成一个独立的比较完整的工业体系和国民经济体系",
+                "B.第一步使中国逐步由农业国转变为工业国",
+                "C.第二步全面实现工业、农业、国防和科学技术现代化,使中国走在世界前列",
+                "D.第二步到本世纪末全面实现现代化,人民生活达到小康水平"
+                ],
+                "answer": ["A", "C"]
+            },
+            {
+                "id": 34,
+                "chapter": 4,
+                "type": "multi",
+                "question": "我党在社会主义建设道路初步探索中提出的重要思想理论观点包括",
+                "options": [
+                "A.社会主义发展两阶段理论",
+                "B.社会主义现代化建设'两步走'发展战略",
+                "C.资本主义经济是社会主义经济的有益补充",
+                "D.要建立适合我国情况和人民需要的社会主义的市场"
+                ],
+                "answer": ["A", "B", "C", "D"]
+            },
+            {
+                "id": 35,
+                "chapter": 4,
+                "type": "multi",
+                "question": "20世纪50年代末60,我党关于经济体制的认识表述正确的包括",
+                "options": [
+                "A.发展商品生产,利用价值规律",
+                "B.社会主义经济应既有计划又有多样性和灵活性",
+                "C.初步建立社会主义市场经济体制",
+                "D.建立适合我国情况和人民需要的社会主义的市场"
+                ],
+                "answer": ["A", "B", "D"]
+            },
+            {
+                "id": 36,
+                "chapter": 4,
+                "type": "multi",
+                "question": "中共八大指出进一步加强社会主义民主政治建设必须做到",
+                "options": [
+                "A.加强党对国家机关的领导和监督",
+                "B.系统地制定比较完备的法律,健全发展",
+                "C.团结一切可以团结的力量,把当前的注意力转到社会主义建设上来",
+                "D.加强民主集中制"
+                ],
+                "answer": ["A", "B"]
+            },
+            {
+                "id": 37,
+                "chapter": 4,
+                "type": "multi",
+                "question": "毛泽东关于社会主义发展阶段的观点表述正确的是",
+                "options": [
+                "A.第一个阶段是不发达的社会主义",
+                "B.第二个阶段是比较发达的社会主义",
+                "C.不发达的社会主义比比较发达的社会主义需要更长的时间",
+                "D.第二个阶段是相对发达的社会主义"
+                ],
+                "answer": ["A", "B", "C"]
+            },
+            {
+                "id": 38,
+                "chapter": 4,
+                "type": "multi",
+                "question": "党领导人民探索社会主义建设道路,历经艰辛和曲折,在理论和实践上取得了一系列重要成果。这些成果具有重要意义",
+                "options": [
+                "A.巩固和发展了我国的社会主义制度",
+                "B.为开创中国特色社会主义提供了宝贵经验、理论准备、物质基础",
+                "C.丰富了科学社会主义的理论和实践",
+                "D.为其他国家的社会主义建设提供了经验和借鉴"
+                ],
+                "answer": ["A", "B", "C", "D"]
+            },
+            {
+                "id": 1,
+                "chapter": 5,
+                "type": "single",
+                "question": "邓小平理论形成的时代背景是",
+                "options": [
+                "A.革命与战争",
+                "B.和平与发展",
+                "C.合作共赢",
+                "D.开放融通"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 2,
+                "chapter": 5,
+                "type": "single",
+                "question": "邓小平理论形成的历史根据是",
+                "options": [
+                "A.中华文明源远流长",
+                "B.毛泽东思想",
+                "C.社会主义建设的经验教训",
+                "D.现代科学技术日新月异"
+                ],
+                "answer": "C"
+            },
+            {
+                "id": 3,
+                "chapter": 5,
+                "type": "single",
+                "question": "邓小平理论形成的现实依据是",
+                "options": [
+                "A.经济全球化迅猛发展",
+                "B.冷战格局结束",
+                "C.改革开放和现代化建设的实践",
+                "D.社会主义初级阶段的基本国情"
+                ],
+                "answer": "C"
+            },
+            {
+                "id": 4,
+                "chapter": 5,
+                "type": "single",
+                "question": "中国社会主义改革开放和现代化建设的总设计师是",
+                "options": [
+                "A.毛泽东",
+                "B.邓小平",
+                "C.胡锦涛",
+                "D.习近平"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 5,
+                "chapter": 5,
+                "type": "single",
+                "question": "'邓小平同志留给我们的最重要的思想和政治遗产，就是'",
+                "options": [
+                "A.他带领党和人民开创的中国特色社会主义，就是他创立的邓小平理论",
+                "B.一国两制的伟大构想与成功实践",
+                "C.对当今时代背景的科学把握与概括",
+                "D.《邓小平文选》"
+                ],
+                "answer": "A"
+            },
+            {
+                "id": 6,
+                "chapter": 5,
+                "type": "single",
+                "question": "党十二届三中全会提出了社会主义经济是",
+                "options": [
+                "A.社会主义计划经济",
+                "B.有计划的商品经济",
+                "C.社会主义市场经济",
+                "D.自由市场经济"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 7,
+                "chapter": 5,
+                "type": "single",
+                "question": "邓小平正式提出'建设有中国特色的社会主义'科学命题是在",
+                "options": [
+                "A.党的十一届三中全会上",
+                "B.党的十一届六中全会上",
+                "C.党的十二大上",
+                "D.党的十三大上"
+                ],
+                "answer": "C"
+            },
+            {
+                "id": 8,
+                "chapter": 5,
+                "type": "single",
+                "question": "把邓小平理论确立为党的指导思想是在",
+                "options": [
+                "A.党的十三大上",
+                "B.党的十四大上",
+                "C.党的十五大上",
+                "D.党的十六大上"
+                ],
+                "answer": "C"
+            },
+            {
+                "id": 9,
+                "chapter": 5,
+                "type": "single",
+                "question": "邓小平理论活的灵魂是",
+                "options": [
+                "A.'三个有利于'标准",
+                "B.四项基本原则",
+                "C.解放思想,实事求是思想路线",
+                "D.改革开放"
+                ],
+                "answer": "C"
+            },
+            {
+                "id": 10,
+                "chapter": 5,
+                "type": "single",
+                "question": "邓小平和我们党对当代中国基本国情的科学判断是",
+                "options": [
+                "A.我国是最大的发展中国家",
+                "B.我国正处于社会主义初级阶段",
+                "C.中国特色社会主义进入新时代",
+                "D.我国已经是发达社会主义"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 11,
+                "chapter": 5,
+                "type": "single",
+                "question": "建设中国特色社会主义的总依据是",
+                "options": [
+                "A.社会主义本质理论",
+                "B.社会主义初级阶段理论",
+                "C.社会主义改革开放理论",
+                "D.社会主义根本任务理论"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 12,
+                "chapter": 5,
+                "type": "single",
+                "question": "社会主义的根本任务是",
+                "options": [
+                "A.群众运动",
+                "B.阶级斗争",
+                "C.发展生产力",
+                "D.掌控意识形态领导权"
+                ],
+                "answer": "C"
+            },
+            {
+                "id": 13,
+                "chapter": 5,
+                "type": "single",
+                "question": "'一个党,一个国家,一个民族,如果一切从本本出发,思想僵化,迷信盛行,那它就不能前进,它的生机就停止了,就要亡党亡国。'这句话要表达的是",
+                "options": [
+                "A.坚持走社会主义道路",
+                "B.坚持解放思想、实事求是",
+                "C.坚持改革开放",
+                "D.中国还处在社会主义初级阶段"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 14,
+                "chapter": 5,
+                "type": "single",
+                "question": "建设中国特色社会主义,关键在于坚持、加强和改善",
+                "options": [
+                "A.党的领导",
+                "B.基层群众自治",
+                "C.社会主义市场经济",
+                "D.国家发展战略"
+                ],
+                "answer": "A"
+            },
+            {
+                "id": 15,
+                "chapter": 5,
+                "type": "multi",
+                "question": "邓小平理论形成的条件是",
+                "options": [
+                "A.和平与发展成为时代主题是邓小平理论形成的时代背景",
+                "B.社会主义建设的经验教训是邓小平理论形成的历史根据",
+                "C.中国共产党历史方位的变化是邓小平理论形成的实践要求",
+                "D.改革开放和现代化建设的实践是邓小平理论形成的现实依据"
+                ],
+                "answer": ["A", "B", "D"]
+            },
+            {
+                "id": 16,
+                "chapter": 5,
+                "type": "multi",
+                "question": "邓小平对时代主题的转变作出了科学判断,指出全球性战略问题有",
+                "options": [
+                "A.社会主义改革问题",
+                "B.和平问题,也称东西问题",
+                "C.环境保护与生态平衡问题",
+                "D.发展问题,也称南北问题"
+                ],
+                "answer": ["B", "D"]
+            },
+            {
+                "id": 17,
+                "chapter": 5,
+                "type": "multi",
+                "question": "邓小平关于社会主义本质的概括",
+                "options": [
+                "A.遵循了科学社会主义的基本原则,反映了人民的利益和时代的要求",
+                "B.廓清了不合乎时代进步和社会发展规律的模糊观念",
+                "C.摆脱了长期以来拘泥于具体模式而忽略社会主义本质的错误倾向",
+                "D.深化了对科学社会主义的认识"
+                ],
+                "answer": ["A", "B", "C", "D"]
+            },
+            {
+                "id": 18,
+                "chapter": 5,
+                "type": "multi",
+                "question": "邓小平关于社会主义本质的概括,具有重大的政治意义、理论意义和实践意义促进",
+                "options": [
+                "A.在坚持社会主义基本制度的基础上推进改革",
+                "B.社会主义的市场化、自由化和私有化改革",
+                "C.改革沿着合乎社会主义本质要求的方向发展",
+                "D.建设中国特色的社会主义"
+                ],
+                "answer": ["A", "C", "D"]
+            },
+            {
+                "id": 19,
+                "chapter": 5,
+                "type": "multi",
+                "question": "'以经济建设为中心'",
+                "options": [
+                "A.回答了社会主义的根本任务问题",
+                "B.体现了发展生产力的本质要求",
+                "C.是兴国之要",
+                "D.是党和国家兴旺发达、长治久安的根本要求"
+                ],
+                "answer": ["A", "B", "C", "D"]
+            },
+            {
+                "id": 20,
+                "chapter": 5,
+                "type": "multi",
+                "question": "邓小平在南方谈话中指出:'社会主义本质是:'",
+                "options": [
+                "A.解放生产力,发展生产力",
+                "B.消灭剥削,消除两极分化",
+                "C.最终达到共同富裕",
+                "D.实现现代化"
+                ],
+                "answer": ["A", "B", "C"]
+            },
+            {
+                "id": 1,
+                "chapter": 6,
+                "type": "single",
+                "question": "生产力最革命、最活跃的因素是",
+                "options": [
+                "A.生产资料",
+                "B.科学技术",
+                "C.劳动者",
+                "D.劳动对象"
+                ],
+                "answer": "C"
+            },
+            {
+                "id": 2,
+                "chapter": 6,
+                "type": "single",
+                "question": "我们党站在时代前列,保持先进性的根本体现和根本要求是",
+                "options": [
+                "A.必须牢牢把握先进文化的前进方向,建设社会主义精神文明",
+                "B.不断实现好维护好发展好最广大人民的根本利益",
+                "C.满足人民群众日益增长的物质文化需要",
+                "D.始终代表中国先进生产力的发展要求,大力促进先进生产力的发展"
+                ],
+                "answer": "D"
+            },
+            {
+                "id": 3,
+                "chapter": 6,
+                "type": "single",
+                "question": "党要承担起推动中国社会进步的历史责任,必须始终紧紧抓住",
+                "options": [
+                "A.战略机遇期",
+                "B.科教兴国战略",
+                "C.发展这个执政兴国的第一要务",
+                "D.社会主义政治文明建设"
+                ],
+                "answer": "C"
+            },
+            {
+                "id": 4,
+                "chapter": 6,
+                "type": "single",
+                "question": "明确提出使用'社会主义市场经济体制'这个提法的是",
+                "options": [
+                "A.邓小平",
+                "B.江泽民",
+                "C.胡锦涛",
+                "D.习近平"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 5,
+                "chapter": 6,
+                "type": "single",
+                "question": "社会主义(初级阶段)基本经济制度是",
+                "options": [
+                "A.公有制为主体、多种所有制经济共同发展",
+                "B.各类市场主体自由竞争",
+                "C.建立健全社会主义分配制度",
+                "D.国家保护一切财产安全和利益"
+                ],
+                "answer": "A"
+            },
+            {
+                "id": 6,
+                "chapter": 6,
+                "type": "single",
+                "question": "建设社会主义政治文明,最根本的就是要",
+                "options": [
+                "A.坚持党的领导、人民当家作主和依法治国的有机统一",
+                "B.全面进行政治体制改革,建立宪政国家",
+                "C.全面建成小康社会,实现经济高速增长扩张",
+                "D.坚持改革开放,建设法制国家"
+                ],
+                "answer": "A"
+            },
+            {
+                "id": 7,
+                "chapter": 6,
+                "type": "single",
+                "question": "江泽民强调推进党的建设新的伟大工程,重点是加强",
+                "options": [
+                "A.党的群众基础",
+                "B.党的执政能力建设",
+                "C.党的阶级基础",
+                "D.党的组织建设"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 8,
+                "chapter": 6,
+                "type": "single",
+                "question": "江泽民强调,我们党的最大的政治优势是",
+                "options": [
+                "A.党员数量众多,是世界第一大党",
+                "B.当今中国的执政党、领导党",
+                "C.从小到大,从弱变强,走过近百年的历程",
+                "D.密切联系群众"
+                ],
+                "answer": "D"
+            },
+            {
+                "id": 9,
+                "chapter": 6,
+                "type": "multi",
+                "question": "'三个代表'重要思想从()方面,揭示了社会主义制度自我完善和发展的途径",
+                "options": [
+                "A.物质基础",
+                "B.文化支撑",
+                "C.政治保证",
+                "D.社会基础"
+                ],
+                "answer": ["A", "B", "D"]
+            },
+            {
+                "id": 10,
+                "chapter": 6,
+                "type": "multi",
+                "question": "坚持中国共产党的领导,就是要",
+                "options": [
+                "A.坚持党在建设中国特色社会主义事业中的领导核心地位,发挥党总揽全局、协调各方的作用",
+                "B.坚持党对国家大政方针和全局工作的政治领导",
+                "C.坚持党管干部的原则",
+                "D.坚持党对意识形态领域的领导"
+                ],
+                "answer": ["A", "B", "C", "D"]
+            },
+            {
+                "id": 1,
+                "chapter": 7,
+                "type": "single",
+                "question": "科学发展观是()提出的",
+                "options": [
+                "A.邓小平",
+                "B.胡锦涛",
+                "C.习近平",
+                "D.刘少奇"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 2,
+                "chapter": 7,
+                "type": "single",
+                "question": "科学发展观的基本要求是",
+                "options": [
+                "A.推动经济社会发展",
+                "B.以人为本",
+                "C.全面协调可持续",
+                "D.统筹兼顾"
+                ],
+                "answer": "C"
+            },
+            {
+                "id": 3,
+                "chapter": 7,
+                "type": "single",
+                "question": "科学发展观的根本方法是",
+                "options": [
+                "A.推动经济社会发展",
+                "B.以人为本",
+                "C.全面协调可持续",
+                "D.统筹兼顾"
+                ],
+                "answer": "D"
+            },
+            {
+                "id": 4,
+                "chapter": 7,
+                "type": "single",
+                "question": "1987年,世界环境与发展委员会关于人类未来的报告《我们共同的未来》正式提出了()的概念",
+                "options": [
+                "A.'世界是平的'",
+                "B.'地球村'",
+                "C.可持续发展",
+                "D.和平与发展"
+                ],
+                "answer": "C"
+            },
+            {
+                "id": 5,
+                "chapter": 7,
+                "type": "single",
+                "question": "关于科学发展观,下列说法错误的是",
+                "options": [
+                "A.科学发展观是对经济社会发展的一般规律认识的深化",
+                "B.是马克思主义关于发展的世界观和方法论的集中体现",
+                "C.是中国特色社会理论体系的重要组成部分",
+                "D.只能用来指导经济建设"
+                ],
+                "answer": "D"
+            },
+            {
+                "id": 6,
+                "chapter": 7,
+                "type": "judge",
+                "question": "以经济建设为中心等同于以经济增长为中心",
+                "options": [
+                "A.对",
+                "B.错"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 7,
+                "chapter": 7,
+                "type": "judge",
+                "question": "科学发展观是马克思主义关于发展的世界观和方法论的集中体现",
+                "options": [
+                "A.对",
+                "B.错"
+                ],
+                "answer": "A"
+            },
+            {
+                "id": 8,
+                "chapter": 7,
+                "type": "judge",
+                "question": "经过新中国成立以来特别是改革开放以来的不懈努力,我国经济社会发展取得了举世瞩目的成就,但仍处于并将长期处于社会主义初级阶段的基本国情没有变",
+                "options": [
+                "A.对",
+                "B.错"
+                ],
+                "answer": "A"
+            },
+            {
+                "id": 9,
+                "chapter": 7,
+                "type": "judge",
+                "question": "推动城乡一体化,是解决三农问题的根本",
+                "options": [
+                "A.对",
+                "B.错"
+                ],
+                "answer": "A"
+            },
+            {
+                "id": 10,
+                "chapter": 7,
+                "type": "judge",
+                "question": "文化是民族的血脉,是人民的精神家园",
+                "options": [
+                "A.对",
+                "B.错"
+                ],
+                "answer": "A"
+            },
+            {
+                "id": 11,
+                "chapter": 7,
+                "type": "judge",
+                "question": "科学发展观只能在短期内适用",
+                "options": [
+                "A.对",
+                "B.错"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 1,
+                "chapter": 8,
+                "type": "single",
+                "question": "正式将毛泽东思想确立为党的指导思想并写入党章的是()",
+                "options": [
+                    "A.党的六大",
+                    "B.党的二大",
+                    "C.党的八大",
+                    "D.党的七大"
+                ],
+                "answer": "D"
+            },
+            {
+                "id": 2,
+                "chapter": 8,
+                "type": "single",
+                "question": "马克思主义中国化第二次历史性飞跃的理论成果是()",
+                "options": [
+                    "A.邓小平理论",
+                    "B.四个全面战略布局",
+                    "C.科学发展观",
+                    "D.中国特色社会主义理论体系"
+                ],
+                "answer": "D"
+            },
+            {
+                "id": 3,
+                "chapter": 8,
+                "type": "single",
+                "question": "一切从实际出发，其中最大的实际就是()",
+                "options": [
+                    "A.和平与发展的时代主题",
+                    "B.实现中华民族伟大复兴的中国梦",
+                    "C.我国现在处于并将长期处于社会主义初级阶段",
+                    "D.全面深化改革的决策"
+                ],
+                "answer": "C"
+            },
+            {
+                "id": 4,
+                "chapter": 8,
+                "type": "single",
+                "question": "党的思想路线得到重新确立的标志的会议是党的()",
+                "options": [
+                    "A.十一届三中全会",
+                    "B.十一届六中全会",
+                    "C.十二大",
+                    "D.十二届三中全会"
+                ],
+                "answer": "A"
+            },
+            {
+                "id": 5,
+                "chapter": 8,
+                "type": "single",
+                "question": "实现马克思主义中国化，走自己的道路，这条道路就是()",
+                "options": [
+                    "A.苏联社会主义建设的道路",
+                    "B.西欧发达国家民主社会主义发展道路",
+                    "C.中国特色社会主义道路",
+                    "D.新民主主义社会的发展道路"
+                ],
+                "answer": "C"
+            },
+            {
+                "id": 6,
+                "chapter": 8,
+                "type": "single",
+                "question": "实事求是的思想路线在全党得到确立的标志是()",
+                "options": [
+                    "A.秋收起义和井冈山革命根据地的建立",
+                    "B.遵义会议和毛泽东领导地位的确立",
+                    "C.长征胜利结束和三大红军会师",
+                    "D.延安整风和党的七大"
+                ],
+                "answer": "D"
+            },
+            {
+                "id": 7,
+                "chapter": 8,
+                "type": "single",
+                "question": "新民主主义革命总路线的内容不包括()",
+                "options": [
+                    "A.反对帝国主义",
+                    "B.无产阶级领导",
+                    "C.反对资本主义",
+                    "D.依靠人民大众"
+                ],
+                "answer": "C"
+            },
+            {
+                "id": 8,
+                "chapter": 8,
+                "type": "single",
+                "question": "以下不在三座大山代表之列的是()",
+                "options": [
+                    "A.某列强国甲",
+                    "B.某列强国甲支持的中国买办乙",
+                    "C.某中国纺织厂主丙",
+                    "D.某大地主丁"
+                ],
+                "answer": "C"
+            },
+            {
+                "id": 9,
+                "chapter": 8,
+                "type": "single",
+                "question": "农村革命根据地能够在中国存在和发展的根本原因是()",
+                "options": [
+                    "A.全国革命形势的继续向前发展",
+                    "B.相当力量正式红军的存在",
+                    "C.党的组织有力量及其政策的不错误",
+                    "D.近代中国是一个政治、经济、文化发展极不平衡的半殖民地半封建的大国"
+                ],
+                "answer": "D"
+            },
+            {
+                "id": 10,
+                "chapter": 8,
+                "type": "single",
+                "question": "新民主主义革命时期，党内思想上的主要矛盾是()",
+                "options": [
+                    "A.无产阶级思想与农民思想的矛盾",
+                    "B.无产阶级思想与非无产阶级思想的矛盾",
+                    "C.无产阶级思想与资产阶级思想的矛盾",
+                    "D.无产阶级思想与小资产阶级思想的矛盾"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 11,
+                "chapter": 8,
+                "type": "single",
+                "question": "中国新民主主义革命有民族革命和民主革命两方面的任务，其中民主革命的基本内容是()",
+                "options": [
+                    "A.土地革命",
+                    "B.武装斗争",
+                    "C.根据地建设",
+                    "D.统一战线"
+                ],
+                "answer": "A"
+            },
+            {
+                "id": 12,
+                "chapter": 8,
+                "type": "single",
+                "question": "新民主主义社会是()",
+                "options": [
+                    "A.固定不变的社会",
+                    "B.过渡性的社会",
+                    "C.独立的社会形态",
+                    "D.从属于新民主主义革命的社会"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 13,
+                "chapter": 8,
+                "type": "single",
+                "question": "在资本主义工商业的社会主义改造中，实行个别企业的公私合营是()",
+                "options": [
+                    "A.初级形式的国家资本主义",
+                    "B.高级形式的国家资本主义",
+                    "C.合作化的最初表现形式",
+                    "D.合作化的最高表现形式"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 14,
+                "chapter": 8,
+                "type": "single",
+                "question": "社会主义改造中最具有中国特色的对马克思主义社会主义学说贡献最大的是对()",
+                "options": [
+                    "A.对资本主义工商业的社会主义改造",
+                    "B.对农业的社会主义改造",
+                    "C.对手工业的社会主义改造",
+                    "D.社会主义工业化道路"
+                ],
+                "answer": "A"
+            },
+            {
+                "id": 15,
+                "chapter": 8,
+                "type": "single",
+                "question": "1953年到1956年中国国内的主要矛盾是()",
+                "options": [
+                    "A.人民大众同帝国主义、封建主义及其走狗国民党反动派残余的矛盾",
+                    "B.工人阶级同资产阶级的矛盾、社会主义同资本主义道路的矛盾",
+                    "C.人民日益增长的物质文化需要同落后的社会生产之间的矛盾",
+                    "D.帝国主义和中华民族的矛盾、封建主义和人民大众的矛盾"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 16,
+                "chapter": 8,
+                "type": "single",
+                "question": "1956年，毛泽东先后在中央政治局扩大会议和最高国务会议上，作了()报告，明确提出了以苏为鉴，独立自主地探索适合中国情况的社会主义建设道路，这标志着探索中国社会主义建设道路的良好开端。",
+                "options": [
+                    "A.《论新阶段》",
+                    "B.《新民主主义论》",
+                    "C.《论十大关系》",
+                    "D.《关于正确处理人民内部矛盾的问题》"
+                ],
+                "answer": "C"
+            },
+            {
+                "id": 17,
+                "chapter": 8,
+                "type": "single",
+                "question": "关于社会主义发展阶段，()提出社会主义又可分为两个阶段，第一个阶段是不发达的社会主义，第二个阶段是比较发达的社会主义。后一个阶段可能比前一阶段需要更长的时间。",
+                "options": [
+                    "A.毛泽东",
+                    "B.周恩来",
+                    "C.刘少奇",
+                    "D.邓小平"
+                ],
+                "answer": "A"
+            },
+            {
+                "id": 18,
+                "chapter": 8,
+                "type": "single",
+                "question": "毛泽东在《关于正确处理人民内部矛盾的问题》中指出，对于共产党和民主党派的矛盾，实行在坚持社会主义道路和共产党领导的前提下()的方针。",
+                "options": [
+                    "A.团结-批评-团结",
+                    "B.统筹兼顾，适当安排",
+                    "C.百花齐放，百家争鸣",
+                    "D.长期共存，互相监督"
+                ],
+                "answer": "D"
+            },
+            {
+                "id": 19,
+                "chapter": 8,
+                "type": "single",
+                "question": "作为处理改革发展稳定关系的重要结合点是()",
+                "options": [
+                    "A.改善人民生活",
+                    "B.政局的稳定",
+                    "C.民主程度",
+                    "D.发展的力度"
+                ],
+                "answer": "A"
+            },
+            {
+                "id": 20,
+                "chapter": 8,
+                "type": "single",
+                "question": "科学技术是第一生产力，当今世界国家之间的竞争过多的是科技力量的竞争，归根到底是()",
+                "options": [
+                    "A.经济实力的竞争",
+                    "B.人才的竞争",
+                    "C.军事实力的竞争",
+                    "D.政治实力的竞争"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 21,
+                "chapter": 8,
+                "type": "multi",
+                "question": "中国特色社会主义理论体系，包括()",
+                "options": [
+                    "A.邓小平理论",
+                    "B.'三个代表'重要思想",
+                    "C.科学发展观等重大战略思想",
+                    "D.毛泽东思想"
+                ],
+                "answer": ["A", "B", "C"]
+            },
+            {
+                "id": 22,
+                "chapter": 8,
+                "type": "multi",
+                "question": "党的十八大把科学发展观同马克思列宁主义、毛泽东思想、邓小平理论、'三个代表'重要思想一道确立为党必须长期坚持的指导思想，科学发展观是()",
+                "options": [
+                    "A.中国革命、建设、改革经验的科学总结",
+                    "B.中国特色社会主义理论体系的最新成果",
+                    "C.中国共产党集体智慧的结晶",
+                    "D.指导党和国家全部工作的强大思想武器"
+                ],
+                "answer": ["B", "C", "D"]
+            },
+            {
+                "id": 23,
+                "chapter": 8,
+                "type": "multi",
+                "question": "在资本主义工商业改造中，初级形式的国家资本主义包括了以下形式()",
+                "options": [
+                    "A.委托加工",
+                    "B.统购包销",
+                    "C.计划订货",
+                    "D.经销代销"
+                ],
+                "answer": ["A", "B", "C", "D"]
+            },
+            {
+                "id": 24,
+                "chapter": 8,
+                "type": "multi",
+                "question": "党的十八大报告强调建设中国特色社会主义的总依据是社会主义初级阶段。党关于社会主义初级阶段的科学判断是()",
+                "options": [
+                    "A.建设中国特色社会主义的理论前提",
+                    "B.中国特色社会主义道路的科学依据",
+                    "C.社会主义改革的理论依据",
+                    "D.中国特色社会主义理论体系的逻辑起点和重要组成部分"
+                ],
+                "answer": ["A", "B", "C", "D"]
+            },
+            {
+                "id": 25,
+                "chapter": 8,
+                "type": "multi",
+                "question": "中国新民主主义革命与旧民主主义革命的区别包括()",
+                "options": [
+                    "A.革命动力不同",
+                    "B.革命前途不同",
+                    "C.指导思想不同",
+                    "D.领导阶级不同"
+                ],
+                "answer": ["B", "C", "D"]
+            },
+            {
+                "id": 26,
+                "word": 8,
+                "type": "multi",
+                "question": "毛泽东认为社会主义社会两类不同性质的矛盾是()",
+                "options": [
+                    "A.人民内部矛盾",
+                    "B.工人阶级和民族资产阶级之间的矛盾",
+                    "C.敌我矛盾",
+                    "D.工人阶级和农民阶级之间的矛盾"
+                ],
+                "answer": ["A", "C"]
+            },
+            {
+                "id": 27,
+                "chapter": 8,
+                "type": "multi",
+                "question": "党在社会主义初级阶段的奋斗目标是建设()的社会主义现代化国家。",
+                "options": [
+                    "A.富强",
+                    "B.民主",
+                    "C.文明",
+                    "D.和谐"
+                ],
+                "answer": ["A", "B", "C", "D"]
+            },
+            {
+                "id": 28,
+                "chapter": 8,
+                "type": "multi",
+                "question": "邓小平关于社会主义本质的论断体现了()",
+                "options": [
+                    "A.解放生产力与发展生产力的统一",
+                    "B.生产力与生产关系的统一",
+                    "C.发展生产力与实现共同富裕的统一",
+                    "D.目的和手段的统一"
+                ],
+                "answer": ["A", "B", "C", "D"]
+            },
+            {
+                "id": 29,
+                "chapter": 8,
+                "type": "multi",
+                "question": "'一带一路'指()",
+                "options": [
+                    "A.丝绸之路经济带",
+                    "B.21世纪丝绸之路经济带",
+                    "C.海上丝绸之路",
+                    "D.21世纪海上丝绸之路"
+                ],
+                "answer": ["A", "D"]
+            },
+            {
+                "id": 30,
+                "chapter": 8,
+                "type": "multi",
+                "question": "树立开放的安全观，在扩大开放中维护国家安全，需要()",
+                "options": [
+                    "A.坚持底线思维，守住核心利益",
+                    "B.培育竞争优势，夯实安全根基",
+                    "C.预防为主、应急为辅，把安全工作前置",
+                    "D.既注重传统安全，又要注重非传统安全"
+                ],
+                "answer": ["A", "B", "C", "D"]
+            },
+            {
+                "id": 1,
+                "chapter": 9,
+                "type": "single",
+                "question": "党内首次明确提出'马克思主义中国化'重大命题是在（）。",
+                "options": [
+                    "A.六届七中全会",
+                    "B.十一届三中全会",
+                    "C.六届六中全会",
+                    "D.遵义会议"
+                ],
+                "answer": "C"
+            },
+            {
+                "id": 2,
+                "chapter": 9,
+                "type": "single",
+                "question": "（）正式将毛泽东思想确立为党的指导思想并写入党章。",
+                "options": [
+                    "A.党的六大",
+                    "B.党的二大",
+                    "C.党的八大",
+                    "D.党的七大"
+                ],
+                "answer": "D"
+            },
+            {
+                "id": 3,
+                "chapter": 9,
+                "type": "single",
+                "question": "马克思主义中国化两大理论成果共同的理论基础是（）。",
+                "options": [
+                    "A.四个全面",
+                    "B.马克思列宁主义",
+                    "C.毛泽东思想",
+                    "D.三个代表"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 4,
+                "chapter": 9,
+                "type": "single",
+                "question": "马克思主义中国化理论成果的精髓是（）。",
+                "options": [
+                    "A.解放思想",
+                    "B.实事求是",
+                    "C.与时俱进",
+                    "D.求真务实"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 5,
+                "chapter": 9,
+                "type": "single",
+                "question": "'四个全面'战略布局是一个统一的整体，其中（）是战略目标。",
+                "options": [
+                    "A.全面建成小康社会",
+                    "B.全面从严治党",
+                    "C.全面依法治国",
+                    "D.全面深化改革"
+                ],
+                "answer": "A"
+            },
+            {
+                "id": 6,
+                "chapter": 9,
+                "type": "single",
+                "question": "马克思主义中国化的实质是（）。",
+                "options": [
+                    "A.坚持马克思主义基本原理",
+                    "B.总结中国革命、建设、改革的实践经验",
+                    "C.弘扬中华优秀传统文化",
+                    "D.马克思主义基本原理同中国具体实际相结合"
+                ],
+                "answer": "D"
+            },
+            {
+                "id": 7,
+                "chapter": 9,
+                "type": "single",
+                "question": "一切从实际出发，其中最大的实际就是（）。",
+                "options": [
+                    "A.和平与发展的时代主题",
+                    "B.实现中华民族伟大复兴的中国梦",
+                    "C.我国现在处于并将长期处于社会主义初级阶段",
+                    "D.全面深化改革的决策"
+                ],
+                "answer": "C"
+            },
+            {
+                "id": 8,
+                "chapter": 9,
+                "type": "single",
+                "question": "在半殖民地半封建的近代中国，各种矛盾中最主要的矛盾是（）。",
+                "options": [
+                    "A.生产发展与人民需求的矛盾",
+                    "B.帝国主义和中华民族的矛盾",
+                    "C.封建主义和人民大众的矛盾",
+                    "D.资本主义发展和封建束缚的矛盾"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 9,
+                "chapter": 9,
+                "type": "single",
+                "question": "中国革命的首要对象是（）。",
+                "options": [
+                    "A.资产阶级",
+                    "B.帝国主义",
+                    "C.封建主义",
+                    "D.官僚资本主义"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 10,
+                "chapter": 9,
+                "type": "single",
+                "question": "中国革命最基本的动力是（）。",
+                "options": [
+                    "A.工人阶级",
+                    "B.农民阶级",
+                    "C.城市小资产阶级",
+                    "D.民族资产阶级"
+                ],
+                "answer": "A"
+            },
+            {
+                "id": 11,
+                "chapter": 9,
+                "type": "single",
+                "question": "中国革命取得胜利的根本保证是（）。",
+                "options": [
+                    "A.建立革命的统一战线",
+                    "B.无产阶级及其政党的领导",
+                    "C.人民群众的革命积极性极大提高",
+                    "D.非常成熟的革命形势"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 12,
+                "chapter": 9,
+                "type": "single",
+                "question": "以下不属于新民主主义革命三大法宝的是（）。",
+                "options": [
+                    "A.土地革命",
+                    "B.统一战线",
+                    "C.武装斗争",
+                    "D.党的建设"
+                ],
+                "answer": "A"
+            },
+            {
+                "id": 13,
+                "chapter": 9,
+                "type": "single",
+                "question": "中国共产党在领导新民主主义革命过程中逐渐形成的三大优良作风不包括（）。",
+                "options": [
+                    "A.独立自主",
+                    "B.理论联系实际",
+                    "C.密切联系群众",
+                    "D.批评与自我批评"
+                ],
+                "answer": "A"
+            },
+            {
+                "id": 14,
+                "chapter": 9,
+                "type": "single",
+                "question": "党的过渡时期总路线被比喻为鸟的'主体'和'两翼'，其中的'主体'指的是（）。",
+                "options": [
+                    "A.对资本主义工商业的社会主义改造",
+                    "B.对农业的社会主义改造",
+                    "C.对手工业的社会主义改造",
+                    "D.实现国家的社会主义工业化"
+                ],
+                "answer": "D"
+            },
+            {
+                "id": 15,
+                "chapter": 9,
+                "type": "single",
+                "question": "1956年我国在生产资料所有制的社会主义改造基本完成后，开始进入（）。",
+                "options": [
+                    "A.新民主主义时期",
+                    "B.国民经济恢复时期",
+                    "C.从新民主主义向社会主义过渡时期",
+                    "D.全面建设社会主义时期"
+                ],
+                "answer": "D"
+            },
+            {
+                "id": 16,
+                "chapter": 9,
+                "type": "single",
+                "question": "新中国成立之初，我国社会的性质是（）。",
+                "options": [
+                    "A.新民主主义社会",
+                    "B.社会主义社会",
+                    "C.共产主义社会",
+                    "D.资本主义社会"
+                ],
+                "answer": "A"
+            },
+            {
+                "id": 17,
+                "chapter": 9,
+                "type": "single",
+                "question": "我国对资本主义工商业的社会主义改造基本完成的标志是（）。",
+                "options": [
+                    "A.个别企业的公私合营",
+                    "B.实行初级形式的国家资本主义",
+                    "C.把私营工商业的生产经营纳入国家计划的轨道",
+                    "D.全行业的公私合营"
+                ],
+                "answer": "D"
+            },
+            {
+                "id": 18,
+                "chapter": 9,
+                "type": "single",
+                "question": "《论十大关系》的发表标志着（）。",
+                "options": [
+                    "A.社会主义制度基本建立",
+                    "B.社会主义改造完成",
+                    "C.党探索中国社会主义建设道路的良好开端",
+                    "D.社会主义建设道路的开始"
+                ],
+                "answer": "C"
+            },
+            {
+                "id": 19,
+                "chapter": 9,
+                "type": "single",
+                "question": "社会主义初级阶段是指（）。",
+                "options": [
+                    "A.任何国家进入社会主义都要经历的起始阶段",
+                    "B.发达国家进入社会主义所要经历的起始阶段",
+                    "C.发展中国家进入社会主义都要经历的特定阶段",
+                    "D.我国在生产力落后、经济不发达条件下建设社会主义要经历的特定阶段"
+                ],
+                "answer": "D"
+            },
+            {
+                "id": 20,
+                "chapter": 9,
+                "type": "single",
+                "question": "社会主义初级阶段是不可逾越的，这主要取决于（）。",
+                "options": [
+                    "A.市场经济的不可逾越性",
+                    "B.生产力发展的不可逾越性",
+                    "C.生产关系发展的不可逾越性",
+                    "D.文化传统的不可逾越性"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 21,
+                "chapter": 9,
+                "type": "single",
+                "question": "社会主义初级阶段基本路线的核心和主体是（）。",
+                "options": [
+                    "A.经济建设",
+                    "B.改革开放",
+                    "C.四项基本原则",
+                    "D.'一个中心，两个基本点'"
+                ],
+                "answer": "D"
+            },
+            {
+                "id": 22,
+                "chapter": 9,
+                "type": "single",
+                "question": "坚持党的基本路线不动摇，关键是（）。",
+                "options": [
+                    "A.坚持四项基本原则不动摇",
+                    "B.坚持改革开放不动摇",
+                    "C.坚持以经济建设为中心不动摇",
+                    "D.坚持党的领导不动摇"
+                ],
+                "answer": "C"
+            },
+            {
+                "id": 23,
+                "chapter": 9,
+                "type": "single",
+                "question": "坚持四项基本原则，核心是（）。",
+                "options": [
+                    "A.坚持社会主义",
+                    "B.坚持马列主义、毛泽东思想",
+                    "C.坚持人民民主专政",
+                    "D.坚持党的领导"
+                ],
+                "answer": "D"
+            },
+            {
+                "id": 24,
+                "chapter": 9,
+                "type": "single",
+                "question": "根据'三步走'发展战略，我国到21世纪中叶的战略目标是（）。",
+                "options": [
+                    "A.全面建成小康社会",
+                    "B.基本接近发达国家水平，生活比较富裕",
+                    "C.基本实现现代化，达到中等发达国家的水平",
+                    "D.物质文明与精神文明基本协调发展"
+                ],
+                "answer": "C"
+            },
+            {
+                "id": 25,
+                "chapter": 9,
+                "type": "single",
+                "question": "2015年10月，中国共产党第十八届五中全会在北京举行。全会审议通过了（）。",
+                "options": [
+                    "A.《中共中央关于全面深化改革若干重大问题的决定》",
+                    "B.《中共中央关于建立社会主义市场经济体制若千问题的决定》",
+                    "C.《中共中央关于制定国民经济和社会发展第十三个五年规划的建议》",
+                    "D.《中共中央关于全面推进依法治国若干重大问题的决定》"
+                ],
+                "answer": "C"
+            },
+            {
+                "id": 26,
+                "chapter": 9,
+                "type": "single",
+                "question": "中国解决所有问题的关键是要靠自己的发展，而发展的根本目的是（）。",
+                "options": [
+                    "A.增强综合国力",
+                    "B.体现社会主义优越性",
+                    "C.发展生产力",
+                    "D.使人民共享发展成果，实现共同富裕"
+                ],
+                "answer": "D"
+            },
+            {
+                "id": 27,
+                "chapter": 9,
+                "type": "single",
+                "question": "社会主义的根本任务是（）。",
+                "options": [
+                    "A.促进人的全面发展",
+                    "B.发展生产力",
+                    "C.提高国家综合国力",
+                    "D.巩固社会主义制度"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 28,
+                "chapter": 9,
+                "type": "single",
+                "question": "社会主义的本质是（）。",
+                "options": [
+                    "A.公有制、按劳分配和社会主义市场经济",
+                    "B.高度发达的物质文明和精神文明",
+                    "C.人民当家作主，成为自由而全面发展的人",
+                    "D.解放和发展生产力，消灭剥削，消除两极分化，最终达到共同富裕"
+                ],
+                "answer": "D"
+            },
+            {
+                "id": 29,
+                "chapter": 9,
+                "type": "single",
+                "question": "党的十八届三中全会的主题是（）。",
+                "options": [
+                    "A.全面建成小康社会",
+                    "B.全面深化改革",
+                    "C.全面依法治国",
+                    "D.全面从严治党"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 30,
+                "chapter": 9,
+                "type": "single",
+                "question": "新民主主义革命的核心问题是（）。",
+                "options": [
+                    "A.无产阶级的领导权问题",
+                    "B.农民问题",
+                    "C.武装斗争问题",
+                    "D.政权问题"
+                ],
+                "answer": "A"
+            },
+            {
+                "id": 31,
+                "chapter": 9,
+                "type": "single",
+                "question": "党在过渡时期的总任务是（）。",
+                "options": [
+                    "A.推翻帝国主义、封建主义",
+                    "B.逐步实现国家的社会主义工业化和社会主义改造",
+                    "C.多快好省地建设社会主义",
+                    "D.把我国建设成富强、民主、文明的社会主义现代化国家"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 32,
+                "chapter": 9,
+                "type": "single",
+                "question": "社会主义初级阶段的主要矛盾是（）。",
+                "options": [
+                    "A.人民群众与敌视、破坏社会主义事业的敌对分子之间的矛盾",
+                    "B.人口、资源、环境与社会发展之间的矛盾",
+                    "C.人民日益增长的物质文化需要同落后的社会生产之间的矛盾",
+                    "D.先进的生产关系同落后的生产力之间的矛盾"
+                ],
+                "answer": "C"
+            },
+            {
+                "id": 33,
+                "chapter": 9,
+                "type": "single",
+                "question": "2012年12月29日，习近平在参观《复兴之路》展览时，主要阐述了（）。",
+                "options": [
+                    "A.中国梦思想",
+                    "B.反腐败的重要性",
+                    "C.环境治理问题",
+                    "D.经济建设问题"
+                ],
+                "answer": "A"
+            },
+            {
+                "id": 34,
+                "chapter": 9,
+                "type": "single",
+                "question": "我国社会主义改革是一场新的革命，其性质是（）。",
+                "options": [
+                    "A.解放生产力，发展生产力",
+                    "B.社会主义基本制度的根本变革",
+                    "C.社会主义制度的自我完善和发展",
+                    "D.建立和完善社会主义市场经济体制"
+                ],
+                "answer": "C"
+            },
+            {
+                "id": 35,
+                "chapter": 9,
+                "type": "single",
+                "question": "马克思主义中国化第一次历史性的飞跃的理论成果是（）。",
+                "options": [
+                    "A.邓小平理论",
+                    "B.三个代表",
+                    "C.毛泽东思想",
+                    "D.'四个全面'战略布局"
+                ],
+                "answer": "C"
+            },
+            {
+                "id": 36,
+                "chapter": 9,
+                "type": "single",
+                "question": "下列哪一项不属于社会主义建设道路初步探索的重要理论成果（）。",
+                "options": [
+                    "A.调动一切积极因素为社会主义事业服务的思想",
+                    "B.正确认识和处理社会主义社会矛盾的思想",
+                    "C.走中国工业化道路的思想",
+                    "D.改革开放的思想"
+                ],
+                "answer": "D"
+            },
+            {
+                "id": 37,
+                "chapter": 9,
+                "type": "single",
+                "question": "全面深化改革要立足于（）。",
+                "options": [
+                    "A.我国处于总体小康社会水平",
+                    "B.我国长期处于社会主义初级阶段",
+                    "C.我国处于从农业国向工业国转变的阶段",
+                    "D.我国属于发展中社会主义国家"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 38,
+                "chapter": 9,
+                "type": "single",
+                "question": "中国的新民主主义社会是属于（）。",
+                "options": [
+                    "A.封建主义体系",
+                    "B.资本主义体系",
+                    "C.社会主义体系",
+                    "D.共产主义体系"
+                ],
+                "answer": "C"
+            },
+            {
+                "id": 39,
+                "chapter": 9,
+                "type": "single",
+                "question": "以下哪篇文献最集中体现了调动一切积极因素为社会主义服务的思想?（）",
+                "options": [
+                    "A.《中国人民政治协商会议共同纲领》",
+                    "B.《论十大关系》",
+                    "C.《读苏联〈政治经济学〉教科书的谈话》",
+                    "D.《在扩大的中央工作会议上的讲话》"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 40,
+                "chapter": 9,
+                "type": "single",
+                "question": "近代中国最基本的国情是（）。",
+                "options": [
+                    "A.中国农民占人口的大多数",
+                    "B.中国是一个半殖民地半封建性质的社会",
+                    "C.中国的工业不发达",
+                    "D.中国的政治不独立"
+                ],
+                "answer": "B"
+            },
+            {
+                "id": 41,
+                "chapter": 9,
+                "type": "multi",
+                "question": "中国特色社会主义理论体系主要围绕（）等基本问题展开。",
+                "options": [
+                    "A.什么是中国梦，怎样实现中国梦",
+                    "B.什么是社会主义，怎样建设社会主义",
+                    "C.建设什么样的党，怎样建设党",
+                    "D.实现什么样的发展、怎样发展"
+                ],
+                "answer": ["B", "C", "D"]
+            },
+            {
+                "id": 42,
+                "chapter": 9,
+                "type": "multi",
+                "question": "党的思想路线是（）。",
+                "options": [
+                    "A.一切从实际出发",
+                    "B.理论联系实际",
+                    "C.在实践中检验和发展真理",
+                    "D.实事求是"
+                ],
+                "answer": ["A", "B", "C", "D"]
+            },
+            {
+                "id": 43,
+                "chapter": 9,
+                "type": "multi",
+                "question": "新民主主义革命的动力包括（）。",
+                "options": [
+                    "A.无产阶级",
+                    "B.农民阶级",
+                    "C.城市小资产阶级",
+                    "D.民族资产阶级"
+                ],
+                "answer": ["A", "B", "C", "D"]
+            },
+            {
+                "id": 44,
+                "chapter": 9,
+                "type": "multi",
+                "question": "新民主主义的经济纲领包括（）。",
+                "options": [
+                    "A.没收封建地主阶级的土地归农民所有",
+                    "B.没收官僚资产阶级的垄断资本归新民主主义的国家所有",
+                    "C.发展资本主义",
+                    "D.保护民族工商业"
+                ],
+                "answer": ["A", "B", "D"]
+            },
+            {
+                "id": 45,
+                "chapter": 9,
+                "type": "multi",
+                "question": "具有中国特点的社会主义改造道路的内容是（）",
+                "options": [
+                    "A.社会主义工业化建设和社会主义改造同时并举",
+                    "B.采取积极引导、逐步过渡的方式",
+                    "C.用和平方法进行改造",
+                    "D.消灭地主阶级"
+                ],
+                "answer": ["A", "B", "C"]
+            },
+            {
+                "id": 46,
+                "chapter": 9,
+                "type": "multi",
+                "question": "《关于正确处理人民内部矛盾的问题》认为，社会主义社会的基本矛盾是（）。",
+                "options": [
+                    "A.生产关系和生产力之间的矛盾",
+                    "B.上层建筑和经济基础之间的矛盾",
+                    "C.人民日益增长的物质文化需求同落后的社会生产之间的矛盾",
+                    "D.阶级矛盾"
+                ],
+                "answer": ["A", "B"]
+            },
+            {
+                "id": 47,
+                "chapter": 9,
+                "type": "multi",
+                "question": "社会主义建设道路初步探索给我们提供了怎样的经验教训?（）",
+                "options": [
+                    "A.正确认识社会主义社会的主要矛盾和根本任务，集中力量发展生产力",
+                    "B.从实际出发进行社会主义建设，建设规模和速度要和国力相适应，不能急于求成",
+                    "C.发展社会主义民主，健全社会主义法制",
+                    "D.坚持对外开放，不能关于门来搞建设，要借鉴和吸收人类文明的共同成果建设社会主义"
+                ],
+                "answer": ["A", "B", "C", "D"]
+            },
+            {
+                "id": 48,
+                "chapter": 9,
+                "type": "multi",
+                "question": "30多年改革开放与现代化建设，使我国各方面发生了巨大的变化，但党的十八大报告指出:我们必须清醒地认识的，我们有'三个没有变'。这'三个没有变'主要是指：（）",
+                "options": [
+                    "A.我国社会主义初级阶段的基本国情没有变",
+                    "B.社会主义初级阶段的社会主要矛盾没有变",
+                    "C.我国是世界最大发展中国家的国际地位没有变",
+                    "D.社会主义初级阶段发展生产力的根本任务没有变"
+                ],
+                "answer": ["A", "B", "C"]
+            },
+            {
+                "id": 49,
+                "chapter": 9,
+                "type": "multi",
+                "question": "需要正确处理全面深化改革中的重大关系有（）",
+                "options": [
+                    "A.整体推进和重点突破的关系",
+                    "B.顶层设计和摸着石头过河的关系",
+                    "C.改革、发展、稳定的关系",
+                    "D.解放思想和实事求是的关系"
+                ],
+                "answer": ["A", "B", "C", "D"]
+            },
+            {
+                "id": 50,
+                "chapter": 9,
+                "type": "multi",
+                "question": "'一带一路'指（）",
+                "options": [
+                    "A.丝绸之路经济带",
+                    "B.21世纪丝绸之路经济带",
+                    "C.海上丝绸之路",
+                    "D.21世纪海上丝绸之路"
+                ],
+                "answer": ["A", "D"]
+            }
+            // 其他题目省略...
+        ];
+        // ================ 需要填写的部分结束 ================
+        
+        // 初始化变量
+        let currentQuestionIndex = 0;
+        let userAnswers = {};
+        let results = {};
+        
+        // DOM元素
+        const currentChapterEl = document.getElementById('current-chapter');
+        const currentQuestionEl = document.getElementById('current-question');
+        const questionTypeEl = document.getElementById('question-type');
+        const optionsContainerEl = document.getElementById('options-container');
+        const submitBtnEl = document.getElementById('submit-btn');
+        const feedbackEl = document.getElementById('feedback');
+        const prevBtnEl = document.getElementById('prev-btn');
+        const nextBtnEl = document.getElementById('next-btn');
+        const currentIndexEl = document.getElementById('current-index');
+        const totalQuestionsEl = document.getElementById('total-questions');
+        const chapterSelectEl = document.getElementById('chapter-select');
+        const questionsNavEl = document.getElementById('questions-navigation');
+        const completedCountEl = document.getElementById('completed-count');
+        const accuracyRateEl = document.getElementById('accuracy-rate');
+        const progressBarEl = document.getElementById('progress-bar');
+        const modal = document.getElementById('announcement-modal');
+        const closeBtn = document.querySelector('.close');
+        const announcementBtn = document.getElementById('announcement-btn');
+        
+        // 显示弹窗
+        function showAnnouncement() {
+            modal.style.display = 'block';
+        }
+
+        // 关闭弹窗
+        function closeAnnouncement() {
+            modal.style.display = 'none';
+        }
+
+        // 点击关闭按钮关闭弹窗
+        closeBtn.addEventListener('click', closeAnnouncement);
+
+        // 点击弹窗外部关闭
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                closeAnnouncement();
+            }
+        });
+
+        // 页面加载完成后显示公告
+        window.addEventListener('load', () => {
+            showAnnouncement();
+        });
+
+        // 点击公告按钮显示弹窗
+        announcementBtn.addEventListener('click', showAnnouncement);
+        // 初始化应用
+        function initApp() {
+            totalQuestionsEl.textContent = questions.length;
+            loadQuestion(currentQuestionIndex);
+            generateQuestionsNavigation();
+            updateStats();
+            
+            // 加载保存的进度
+            const savedProgress = localStorage.getItem('quizProgress');
+            if (savedProgress) {
+                const progress = JSON.parse(savedProgress);
+                userAnswers = progress.userAnswers;
+                results = progress.results;
+                updateQuestionsNavigation();
+                updateStats();
+            }
+        }
+        
+        // 加载题目
+        function loadQuestion(index) {
+            const question = questions[index];
+            
+            // 更新题目信息
+            currentQuestionIndex = index;
+            currentChapterEl.textContent = question.chapter;
+            currentQuestionEl.textContent = question.question;
+            currentIndexEl.textContent = index + 1;
+            
+            // 设置题目类型
+            let typeText = '';
+            if (question.type === 'single') typeText = '[单选题] ';
+            else if (question.type === 'multi') typeText = '[多选题] ';
+            else if (question.type === 'judge') typeText = '[判断题] ';
+            questionTypeEl.textContent = typeText;
+            
+            // 清空选项容器
+            optionsContainerEl.innerHTML = '';
+            
+            // 生成选项
+            question.options.forEach((option, idx) => {
+                const optionEl = document.createElement('div');
+                optionEl.className = 'option';
+                
+                const input = document.createElement('input');
+                input.type = question.type === 'multi' ? 'checkbox' : 'radio';
+                input.name = 'option';
+                input.value = idx;
+                
+                const label = document.createElement('label');
+                label.htmlFor = `option-${idx}`;
+                label.textContent = option;
+                
+                optionEl.appendChild(input);
+                optionEl.appendChild(label);
+                
+                // 添加选择事件
+                optionEl.addEventListener('click', () => {
+                    selectOption(optionEl, idx);
+                });
+                
+                // 恢复已选答案
+                if (userAnswers[index]) {
+                    if (question.type === 'multi') {
+                        if (userAnswers[index].includes(idx)) {
+                            optionEl.classList.add('selected');
+                            input.checked = true;
+                        }
+                    } else {
+                        if (userAnswers[index] === idx) {
+                            optionEl.classList.add('selected');
+                            input.checked = true;
+                        }
+                    }
+                }
+                
+                optionsContainerEl.appendChild(optionEl);
+            });
+            
+            // 显示/隐藏提交按钮
+            submitBtnEl.style.display = question.type === 'multi' ? 'block' : 'none';
+            
+            // 更新反馈
+            if (results[index]) {
+                showFeedback(results[index].isCorrect, question.answer);
+            } else {
+                feedbackEl.style.display = 'none';
+            }
+            
+            // 更新导航按钮状态
+            prevBtnEl.disabled = index === 0;
+            nextBtnEl.disabled = index === questions.length - 1;
+            
+            // 设置章节选择
+            chapterSelectEl.value = question.chapter;
+        }
+        
+        // 选择选项
+        function selectOption(optionEl, optionIndex) {
+            const question = questions[currentQuestionIndex];
+            const isMulti = question.type === 'multi';
+            const options = optionsContainerEl.querySelectorAll('.option');
+            
+            if (isMulti) {
+                // 多选题：切换选中状态
+                optionEl.classList.toggle('selected');
+                const checkbox = optionEl.querySelector('input');
+                checkbox.checked = !checkbox.checked;
+                
+                // 更新用户答案
+                if (!userAnswers[currentQuestionIndex]) {
+                    userAnswers[currentQuestionIndex] = [];
+                }
+                
+                const index = userAnswers[currentQuestionIndex].indexOf(optionIndex);
+                if (index === -1) {
+                    userAnswers[currentQuestionIndex].push(optionIndex);
+                } else {
+                    userAnswers[currentQuestionIndex].splice(index, 1);
+                }
+            } else {
+                // 单选/判断题：直接选择
+                options.forEach(opt => {
+                    opt.classList.remove('selected');
+                    opt.querySelector('input').checked = false;
+                });
+                
+                optionEl.classList.add('selected');
+                optionEl.querySelector('input').checked = true;
+                
+                // 更新用户答案
+                userAnswers[currentQuestionIndex] = optionIndex;
+                
+                // 立即检查答案（非多选题）
+                if (question.type !== 'multi') {
+                    checkAnswer();
+                }
+            }
+            
+            // 更新导航状态
+            updateQuestionsNavigation();
+            updateStats();
+            
+            // 保存进度
+            saveProgress();
+        }
+        
+        // 提交答案（多选）
+        submitBtnEl.addEventListener('click', checkAnswer);
+        
+        // 检查答案
+        function checkAnswer() {
+            const question = questions[currentQuestionIndex];
+            const userAnswer = userAnswers[currentQuestionIndex];
+            let isCorrect = false;
+            
+            if (question.type === 'multi') {
+                // 多选题：检查答案（顺序无关）
+                if (userAnswer && userAnswer.length === question.answer.length) {
+                    const userAnswersSorted = userAnswer.sort().map(idx => question.options[idx][0]);
+                    const correctAnswersSorted = [...question.answer].sort();
+                    isCorrect = JSON.stringify(userAnswersSorted) === JSON.stringify(correctAnswersSorted);
+                }
+            } else {
+                // 单选/判断题：检查答案
+                const selectedOption = question.options[userAnswer];
+                isCorrect = selectedOption.startsWith(question.answer);
+            }
+            
+            // 保存结果
+            results[currentQuestionIndex] = {
+                isCorrect,
+                userAnswer,
+                correctAnswer: question.answer
+            };
+            
+            // 显示反馈
+            showFeedback(isCorrect, question.answer);
+            
+            // 更新导航状态
+            updateQuestionsNavigation();
+            updateStats();
+            
+            // 保存进度
+            saveProgress();
+        }
+        
+        // 显示反馈
+        function showFeedback(isCorrect, correctAnswer) {
+            feedbackEl.textContent = isCorrect 
+                ? '✓ 回答正确！' 
+                : `✗ 回答错误！正确答案是：${correctAnswer}`;
+            
+            feedbackEl.className = `feedback ${isCorrect ? 'correct' : 'incorrect'}`;
+            feedbackEl.style.display = 'block';
+            
+            // 多选题显示所有选项状态
+                        // 多选题显示所有选项状态
+            if (questions[currentQuestionIndex].type === 'multi') {
+                const options = optionsContainerEl.querySelectorAll('.option');
+                options.forEach((option, idx) => {
+                    const optionLetter = questions[currentQuestionIndex].options[idx][0];
+                    const isSelected = userAnswers[currentQuestionIndex]?.includes(idx);
+                    
+                    if (isSelected) {
+                        const isCorrectAnswer = questions[currentQuestionIndex].answer.includes(optionLetter);
+                        option.classList.toggle('correct', isCorrectAnswer);
+                        option.classList.toggle('incorrect', !isCorrectAnswer);
+                    } else {
+                        const isCorrectAnswer = questions[currentQuestionIndex].answer.includes(optionLetter);
+                        option.classList.toggle('correct', isCorrectAnswer);
+                    }
+                });
+            } else {
+                // 单选/判断题显示正确选项
+                const options = optionsContainerEl.querySelectorAll('.option');
+                options.forEach((option, idx) => {
+                    const optionLetter = questions[currentQuestionIndex].options[idx][0];
+                    const isCorrectAnswer = optionLetter === questions[currentQuestionIndex].answer;
+                    
+                    if (isCorrectAnswer) {
+                        option.classList.add('correct');
+                    } else {
+                        option.classList.add('incorrect');
+                    }
+                });
+            }
+        }
+        
+        // 生成题目导航
+        function generateQuestionsNavigation() {
+            questionsNavEl.innerHTML = '';
+            
+            questions.forEach((_, index) => {
+                const navItem = document.createElement('div');
+                navItem.className = 'question-nav';
+                navItem.textContent = index + 1;
+                navItem.dataset.index = index;
+                
+                navItem.addEventListener('click', () => {
+                    loadQuestion(index);
+                });
+                
+                questionsNavEl.appendChild(navItem);
+            });
+            
+            updateQuestionsNavigation();
+        }
+        
+        // 更新题目导航状态
+        function updateQuestionsNavigation() {
+            const navItems = questionsNavEl.querySelectorAll('.question-nav');
+            
+            navItems.forEach((item, index) => {
+                item.classList.remove('answered', 'correct', 'incorrect');
+                
+                if (results[index]) {
+                    item.classList.add('answered');
+                    item.classList.toggle('correct', results[index].isCorrect);
+                    item.classList.toggle('incorrect', !results[index].isCorrect);
+                }
+            });
+        }
+        
+        // 更新统计信息
+        function updateStats() {
+            const answeredCount = Object.keys(results).length;
+            const correctCount = Object.values(results).filter(r => r.isCorrect).length;
+            const accuracy = answeredCount > 0 ? Math.round((correctCount / answeredCount) * 100) : 0;
+            const progress = Math.round((answeredCount / questions.length) * 100);
+            
+            completedCountEl.textContent = `${answeredCount}/${questions.length}`;
+            accuracyRateEl.textContent = `${accuracy}%`;
+            progressBarEl.style.width = `${progress}%`;
+        }
+        
+        // 保存进度
+        function saveProgress() {
+            const progress = {
+                userAnswers,
+                results
+            };
+            localStorage.setItem('quizProgress', JSON.stringify(progress));
+        }
+        
+        // 清除进度
+        function resetProgress() {
+            userAnswers = {};
+            results = {};
+            localStorage.removeItem('quizProgress');
+            updateQuestionsNavigation();
+            updateStats();
+            loadQuestion(currentQuestionIndex);
+        }
+        
+        // 切换章节
+        chapterSelectEl.addEventListener('change', () => {
+            const chapter = parseInt(chapterSelectEl.value);
+            const chapterQuestions = questions.filter(q => q.chapter == chapter);
+            
+            if (chapterQuestions.length > 0) {
+                const firstQuestionIndex = questions.findIndex(q => q.chapter == chapter);
+                loadQuestion(firstQuestionIndex);
+            }
+        });
+        
+        // 上一题
+        prevBtnEl.addEventListener('click', () => {
+            if (currentQuestionIndex > 0) {
+                loadQuestion(currentQuestionIndex - 1);
+            }
+        });
+        
+        // 下一题
+        nextBtnEl.addEventListener('click', () => {
+            if (currentQuestionIndex < questions.length - 1) {
+                loadQuestion(currentQuestionIndex + 1);
+            }
+        });
+        
+        // 添加重置按钮
+        const resetBtn = document.createElement('button');
+        resetBtn.textContent = '重新开始';
+        resetBtn.className = 'btn';
+        resetBtn.style.background = '#e74c3c';
+        resetBtn.style.color = 'white';
+        resetBtn.style.marginTop = '20px';
+        resetBtn.addEventListener('click', resetProgress);
+        document.querySelector('.sidebar').appendChild(resetBtn);
+        // 在 resetBtn 后面添加 "获取最新版" 按钮
+        const updateBtn = document.createElement('button');
+        updateBtn.textContent = '获取最新版';
+        updateBtn.className = 'btn';
+        updateBtn.style.background = '#3498db';
+        updateBtn.style.color = 'white';
+        updateBtn.style.marginTop = '20px';
+        updateBtn.style.marginLeft = '10px';
+        updateBtn.addEventListener('click', () => {
+            // ================ 需要填写的网址 ================
+            const updateUrl = 'https://pan.baidu.com/s/1k5oH-2YSGs3zQhRwnacfig?pwd=6e93';  // 在此处填写目标网址
+            // ==============================================
+            window.location.href = updateUrl;
+        });
+        document.querySelector('.sidebar').appendChild(updateBtn);
+        
+        // 初始化应用
+        initApp();
+    </script>
+</body>
+</html>
+                   
